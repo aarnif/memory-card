@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&display=swap");
+
+.header {
+  background-color: #282c34;
+  font-family: Caprasimo, "sans-serif";
+  font-size: calc(10px + 2vmin);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid white;
+}
+
+.header--title {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.header--level {
+  position: absolute;
+  top: 40%;
+  font-size: calc(10px + 3vmin);
+  opacity: 0;
+}
+
+.header--level.active {
+  animation: 1500ms size ease-in-out;
+  z-index: 1;
+}
+
+@keyframes size {
+  0% {
+    font-size: calc(10px + 3vmin);
+    opacity: 0;
+  }
+
+  50% {
+    font-size: calc(10px + 6vmin);
+    opacity: 1;
+  }
+
+  100% {
+    font-size: calc(10px + 3vmin);
+    opacity: 0;
+  }
+}

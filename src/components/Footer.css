@@ -1,0 +1,10 @@
+.footer {
+  background-color: #282c34;
+  font-family: Caprasimo, "sans-serif";
+  border-top: 3px solid white;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,28 @@
+.card {
+  border: 3px solid white;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: skew 1000ms ease-in-out;
+}
+
+@keyframes skew {
+  0% {
+    transform: rotate3d(0, -1, 0, 90deg);
+  }
+
+  100% {
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+}
+
+.card:hover {
+  border: 3px solid darkgray;
+  cursor: pointer;
+}
+
+.card:active {
+  transform: translateY(5px);
+}
