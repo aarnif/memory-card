@@ -18,7 +18,17 @@ function App() {
   const [cards, setCards] = useState([0, 1]);
   const [playedCards, setPlayedCards] = useState([]);
   const [level, setLevel] = useState(0);
-  const topLevel = Math.floor(cardIcons.length / 2);
+
+  // Start counting levels from 1
+  const shownLevel = level + 1;
+
+  // Divide by two because two cards are added each level
+  const topLevel = cardIcons.length / 2;
+
+  console.log(" ");
+  console.log(level);
+  console.log(topLevel);
+  console.log(" ");
 
   const playCard = (cardNumber) => {
     if (!playedCards.includes(cardNumber)) {
@@ -85,7 +95,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <Header level={level} />
+      <Header level={shownLevel} />
       {!isNewGame ? (
         <main className="main-content-modal">
           <NewGameModal callback={clickNewGame} />
@@ -95,6 +105,7 @@ function App() {
           <RestartGameModal
             level={level}
             topLevel={topLevel}
+            shownLevel={shownLevel}
             callback={clickNewGame}
           />
         </main>

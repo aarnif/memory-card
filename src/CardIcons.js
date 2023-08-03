@@ -34,5 +34,4 @@ const cardIcons = [
   Riddler,
 ];
 
-// Use only twelve first icons until more dynamic grid has been creater
-export default cardIcons.slice(0, 12);
+export default cardIcons;

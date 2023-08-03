@@ -1,18 +1,13 @@
-:root {
-  --card-width: 300px;
-}
-
 .card {
   border: 3px solid #0077f2;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
-  width: var(--card-width);
-  height: var(--card-width * 1.5);
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   animation: skew 1000ms ease-in-out;
-  transition: transform 500ms ease-in-out;
+  transition: transform 300ms ease-in-out;
 }
 
 @keyframes skew {
@@ -26,7 +21,7 @@
 }
 
 .card:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   cursor: pointer;
 }
 
@@ -35,5 +30,5 @@
 }
 
 .card--character {
-  width: var(--card-width);
+  width: 100%;
 }
