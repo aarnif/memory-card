@@ -19,7 +19,7 @@
   text-align: center;
   height: 100%;
   display: grid;
-  grid-template-rows: 200px 1fr 100px;
+  grid-template-rows: 160px 1fr 40px;
 }
 
 .main-content-modal {
@@ -30,11 +30,10 @@
 
 .main-content-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
-  grid-gap: 100px;
+  grid-template-columns: repeat(auto-fit, 330px);
+  grid-gap: 30px;
   align-items: start;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-  padding: 100px;
+  padding: 50px;
 }

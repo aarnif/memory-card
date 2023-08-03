@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import GameModal from "./components/GameModal";
+import NewGameModal from "./components/NewGameModal";
+import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Card } from "./components/Card";
 import { Footer } from "./components/Footer";
@@ -14,9 +15,10 @@ const toggleOverlay = () => {
 function App() {
   const [isNewGame, setIsNewGame] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [cards, setCards] = useState([1, 2]);
+  const [cards, setCards] = useState([0, 1]);
   const [playedCards, setPlayedCards] = useState([]);
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(0);
+  const topLevel = Math.floor(cardIcons.length / 2);
 
   const playCard = (cardNumber) => {
     if (!playedCards.includes(cardNumber)) {
@@ -35,10 +37,6 @@ function App() {
   };
 
   const setLevelAnimation = () => {
-    setLevelAnimationHeader();
-  };
-
-  const setLevelAnimationHeader = () => {
     const levelHeader = document.querySelector(".header--level");
     levelHeader.classList.add("active");
     setTimeout(() => {
@@ -51,12 +49,12 @@ function App() {
     else if (isGameOver) setIsGameOver((prevState) => !prevState);
     toggleOverlay();
     setLevelAnimation();
-    setLevel(1);
+    setLevel(0);
   };
 
   const nextLevel = () => {
     setLevel((prevState) => prevState + 1);
-    setCards((prevState) => [...prevState, cards.length + 1]);
+    setCards((prevState) => [...prevState, cards.length, cards.length + 1]);
     setPlayedCards([]);
     setLevelAnimation();
   };
@@ -64,12 +62,19 @@ function App() {
   const gameOver = () => {
     toggleOverlay();
     setIsGameOver((prevState) => !prevState);
-    setCards([1, 2]);
+    setCards([0, 1]);
     setPlayedCards([]);
   };
 
   // Shuffle Cards after every clicked card
   useEffect(() => setCards(shuffleArray(cards)), [playedCards, cards]);
+
+  // Check if the top level has been reached
+  useEffect(() => {
+    if (topLevel === level) {
+      gameOver();
+    }
+  }, [level]);
 
   // Check if all cards in the level has been clicked
   useEffect(() => {
@@ -83,36 +88,13 @@ function App() {
       <Header level={level} />
       {!isNewGame ? (
         <main className="main-content-modal">
-          <GameModal
-            textContent={
-              <>
-                {" "}
-                <h1 className="new-game-modal--header">
-                  Animal theme memory game
-                </h1>
-                <h2 className="new-game-modal--subheader">
-                  Hello, adventurer!
-                </h2>
-                <p className="new-game-modal--text">
-                  Ready to find animals from our animal kingdom?
-                </p>
-                <p className="new-game-modal--text">
-                  Click the same animal only once!
-                </p>
-              </>
-            }
-            callback={clickNewGame}
-          />
+          <NewGameModal callback={clickNewGame} />
         </main>
       ) : isGameOver ? (
         <main className="main-content-modal">
-          <GameModal
-            textContent={
-              <>
-                <h1 className="new-game-modal--header">Congratulations!</h1>
-                <h2 className="new-game-modal--subheader">{`You reached level ${level}!`}</h2>
-              </>
-            }
+          <RestartGameModal
+            level={level}
+            topLevel={topLevel}
             callback={clickNewGame}
           />
         </main>

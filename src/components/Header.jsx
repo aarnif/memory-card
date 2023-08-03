@@ -1,9 +1,10 @@
 import "./Header.css";
+import DcComics from "../assets/DC_Comics_logo.svg";
 
 export function Header(props) {
   return (
     <header className="header">
-      <h1 className="header--title">Memory Game</h1>
+      <img className="header--icon" src={DcComics}></img>
       <div className="header--level">Level {props.level}</div>
     </header>
   );

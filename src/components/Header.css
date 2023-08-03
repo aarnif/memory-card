@@ -1,15 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Caprasimo&display=swap");
 
 .header {
-  background-color: #282c34;
+  background-color: rgba(0, 0, 0, 0.5);
   font-family: Caprasimo, "sans-serif";
   font-size: calc(10px + 2vmin);
-  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #0077f2;
+}
+
+.header--icon {
+  width: 120px;
 }
 
 .header--title {
