@@ -1,5 +1,5 @@
 import "./Header.css";
-import DcComics from "../assets/DC_Comics_logo.svg";
+import DcComics from "../assets/other-images/dc_comics_logo.svg";
 
 export function Header(props) {
   return (

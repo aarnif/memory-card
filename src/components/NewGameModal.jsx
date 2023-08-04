@@ -8,7 +8,7 @@ const NewGameModal = ({ callback }) => {
         <p className="game-modal--text">
           {"Click each character once to level up."}
           <br></br>
-          {"Each level adds a new character."}
+          {"Each level adds two new characters."}
           <br></br>
           {"Ready to test your memory? Click 'Begin'!"}
         </p>

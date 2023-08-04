@@ -5,7 +5,6 @@ import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Card } from "./components/Card";
 import { Footer } from "./components/Footer";
-import cardIcons from "./CardIcons";
 
 const toggleOverlay = () => {
   const overlay = document.getElementById("overlay");
@@ -13,22 +12,12 @@ const toggleOverlay = () => {
 };
 
 function App() {
+  const [images, setImages] = useState([]);
   const [isNewGame, setIsNewGame] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [cards, setCards] = useState([0, 1]);
   const [playedCards, setPlayedCards] = useState([]);
   const [level, setLevel] = useState(0);
-
-  // Start counting levels from 1
-  const shownLevel = level + 1;
-
-  // Divide by two because two cards are added each level
-  const topLevel = cardIcons.length / 2;
-
-  console.log(" ");
-  console.log(level);
-  console.log(topLevel);
-  console.log(" ");
 
   const playCard = (cardNumber) => {
     if (!playedCards.includes(cardNumber)) {
@@ -76,10 +65,28 @@ function App() {
     setPlayedCards([]);
   };
 
-  // Shuffle Cards after every clicked card
-  useEffect(() => setCards(shuffleArray(cards)), [playedCards, cards]);
+  // Start counting levels from 1
+  const shownLevel = level + 1;
+  // Divide by two because two cards are added each level
+  const topLevel = images.length / 2;
+  // Shuffle cards at each render
+  const shuffledCards = shuffleArray(cards);
 
-  // Check if the top level has been reached
+  // Load all card images dynamically at first render
+  useEffect(() => {
+    const loadImages = async () => {
+      const importAll = import.meta.glob("./assets/card-images/*.png");
+      const imgs = [];
+      for (const path in importAll) {
+        const img = await importAll[path]();
+        imgs.push(img.default);
+      }
+      setImages((prevState) => [...prevState, ...imgs]);
+    };
+    loadImages();
+  }, []);
+
+  // Check if top level has been reached
   useEffect(() => {
     if (topLevel === level) {
       gameOver();
@@ -111,11 +118,11 @@ function App() {
         </main>
       ) : (
         <main className="main-content-cards">
-          {cards.map((card) => (
+          {shuffledCards.map((card) => (
             <Card
               key={card}
               id={card}
-              icon={cardIcons[card]}
+              icon={images[card]}
               playCard={() => playCard(card)}
             />
           ))}
