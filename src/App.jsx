@@ -101,7 +101,7 @@ function App() {
   }, [playedCards, cards]);
 
   return (
-    <div className="wrapper">
+    <>
       <Header level={shownLevel} />
       {!isNewGame ? (
         <main className="main-content-modal">
@@ -130,7 +130,7 @@ function App() {
       )}
       <Footer />
       <div id="overlay" className="active"></div>
-    </div>
+    </>
   );
 }
 
