@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
+import { loadImages } from "./utils/loadImages";
+import { shuffleArray, setLevelAnimation, toggleOverlay } from "./utils/game";
 import "./App.css";
 import NewGameModal from "./components/NewGameModal";
 import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
 import { Footer } from "./components/Footer";
-
-const toggleOverlay = () => {
-  const overlay = document.getElementById("overlay");
-  overlay.classList.toggle("active");
-};
 
 function App() {
   const [images, setImages] = useState([]);
@@ -19,18 +16,15 @@ function App() {
   const [playedCards, setPlayedCards] = useState([]);
   const [level, setLevel] = useState(0);
 
-  // Load all card images dynamically at first render
+  // Start counting levels from 1
+  const shownLevel = level + 1;
+  // Divide by two because two cards are added each level
+  const topLevel = images.length / 2;
+  // Shuffle cards at each render
+  const shuffledCards = shuffleArray(cards);
+
   useEffect(() => {
-    const loadImages = async () => {
-      const importAll = import.meta.glob("./assets/card-images/*.png");
-      const imgs = [];
-      for (const path in importAll) {
-        const img = await importAll[path]();
-        imgs.push(img.default);
-      }
-      setImages([...imgs]);
-    };
-    loadImages();
+    loadImages().then((images) => setImages(images));
   }, []);
 
   // Check if top level has been reached
@@ -55,22 +49,6 @@ function App() {
     }
   };
 
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
-
-  const setLevelAnimation = () => {
-    const levelHeader = document.querySelector(".header--level");
-    levelHeader.classList.add("active");
-    setTimeout(() => {
-      levelHeader.classList.remove("active");
-    }, 1500);
-  };
-
   const clickNewGame = () => {
     if (!isNewGame) setIsNewGame((prevState) => !prevState);
     else if (isGameOver) setIsGameOver((prevState) => !prevState);
@@ -93,12 +71,6 @@ function App() {
     setPlayedCards([]);
   };
 
-  // Start counting levels from 1
-  const shownLevel = level + 1;
-  // Divide by two because two cards are added each level
-  const topLevel = images.length / 2;
-  // Shuffle cards at each render
-  const shuffledCards = shuffleArray(cards);
   return (
     <>
       <Header level={shownLevel} />
