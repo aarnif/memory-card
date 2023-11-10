@@ -28,7 +28,7 @@ function App() {
         const img = await importAll[path]();
         imgs.push(img.default);
       }
-      setImages((prevState) => [...prevState, ...imgs]);
+      setImages([...imgs]);
     };
     loadImages();
   }, []);
@@ -98,9 +98,7 @@ function App() {
   // Divide by two because two cards are added each level
   const topLevel = images.length / 2;
   // Shuffle cards at each render
-  // const shuffledCards = shuffleArray(cards);
-  const shuffledCards = cards;
-
+  const shuffledCards = shuffleArray(cards);
   return (
     <>
       <Header level={shownLevel} />

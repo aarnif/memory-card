@@ -15,7 +15,6 @@
   pointer-events: all;
 }
 
-.main-content-cards,
 .main-content-modal {
   flex-grow: 1;
 }

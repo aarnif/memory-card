@@ -1,8 +1,17 @@
-.main-content-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.wrapper {
+  margin: 50px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.card-grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
   justify-items: center;
-  font-size: calc(10px + 2vmin);
-  margin: 100px;
+  gap: 40px;
 }
