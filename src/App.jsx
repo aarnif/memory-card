@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { loadImages } from "./utils/loadImages";
+import { loadCardData } from "./utils/loadCardData";
 import { shuffleArray, setLevelAnimation, toggleOverlay } from "./utils/game";
 import "./App.css";
 import NewGameModal from "./components/NewGameModal";
@@ -9,22 +9,26 @@ import { Cards } from "./components/Cards";
 import { Footer } from "./components/Footer";
 
 function App() {
-  const [images, setImages] = useState([]);
   const [isNewGame, setIsNewGame] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [cards, setCards] = useState([0, 1]);
-  const [playedCards, setPlayedCards] = useState([]);
+  const [cardData, setCardData] = useState([]);
+  const [cards, setCards] = useState([]);
   const [level, setLevel] = useState(0);
 
   // Start counting levels from 1
   const shownLevel = level + 1;
   // Divide by two because two cards are added each level
-  const topLevel = images.length / 2;
+  const topLevel = cards.length / 2;
   // Shuffle cards at each render
   const shuffledCards = shuffleArray(cards);
+  const clickedCards = cards.filter((card) => card.isClicked);
 
   useEffect(() => {
-    loadImages().then((images) => setImages(images));
+    loadCardData().then((cardData) => {
+      setCardData(cardData);
+      setCards(cardData.slice(0, 2));
+      console.log(cardData);
+    });
   }, []);
 
   // Check if top level has been reached
@@ -36,14 +40,18 @@ function App() {
 
   // Check if all cards in the level has been clicked
   useEffect(() => {
-    if (playedCards.length === cards.length) {
+    if (cards.length > 0 && clickedCards.length === cards.length) {
       nextLevel();
     }
-  }, [playedCards, cards]);
+  }, [clickedCards, cards]);
 
-  const playCard = (cardNumber) => {
-    if (!playedCards.includes(cardNumber)) {
-      setPlayedCards((prevState) => [...prevState, cardNumber]);
+  const playCard = (cardId) => {
+    const findCard = clickedCards.find((card) => card.id === cardId);
+    if (!findCard) {
+      const playCard = cards.map((card) =>
+        card.id === cardId ? { ...card, isClicked: true } : card
+      );
+      setCards(playCard);
     } else {
       gameOver();
     }
@@ -59,16 +67,14 @@ function App() {
 
   const nextLevel = () => {
     setLevel((prevState) => prevState + 1);
-    setCards((prevState) => [...prevState, cards.length, cards.length + 1]);
-    setPlayedCards([]);
+    setCards((prevState) => cardData.slice(0, prevState.length + 2));
     setLevelAnimation();
   };
 
   const gameOver = () => {
     toggleOverlay();
     setIsGameOver((prevState) => !prevState);
-    setCards([0, 1]);
-    setPlayedCards([]);
+    setCards(cardData.slice(0, 2));
   };
 
   return (
@@ -88,7 +94,7 @@ function App() {
           />
         </main>
       ) : (
-        <Cards cards={shuffledCards} images={images} playCard={playCard} />
+        <Cards cards={shuffledCards} playCard={playCard} />
       )}
       <Footer />
       <div id="overlay" className="active"></div>

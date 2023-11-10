@@ -1,16 +1,16 @@
 import { Card } from "./Card";
 import "./Cards.css";
 
-export function Cards({ cards, images, playCard }) {
+export function Cards({ cards, playCard }) {
   return (
     <main className="wrapper">
       <div className="card-grid">
         {cards.map((card) => (
           <Card
-            key={card}
-            id={card}
-            icon={images[card]}
-            playCard={() => playCard(card)}
+            key={card.id}
+            id={card.id}
+            icon={card.image}
+            playCard={() => playCard(card.id)}
           />
         ))}
       </div>
