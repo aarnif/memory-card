@@ -9,7 +9,8 @@ export function Cards({ cards, playCard }) {
           <Card
             key={card.id}
             id={card.id}
-            icon={card.image}
+            image={card.image}
+            name={card.name}
             playCard={() => playCard(card.id)}
           />
         ))}

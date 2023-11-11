@@ -5,23 +5,32 @@
   --card-max-height: calc(var(--card-max-width) * 1.5);
   --card-width: 250px;
   --card-height: calc(var(--card-width) * 1.5);
+  --border-radius: 10px;
+  --image-padding: 10px 10px 0px 10px;
 }
 
-.card {
+.character-card,
+.logo-card {
   min-width: var(--card-min-width);
   min-height: var(--card-min-height);
   max-width: var(--card-max-width);
   max-height: var(--card-max-height);
+  width: var(--card-width);
   box-shadow: 0px 0px 2px 2px rgba(0, 119, 242, 0.7);
-  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: skew 1000ms ease-in-out;
-  transition: transform 200ms ease-in-out;
+  padding: var(--image-padding);
 }
 
-@keyframes skew {
+.character-card {
+  animation: rotate 700ms ease-in-out;
+}
+
+@keyframes rotate {
   0% {
     transform: rotate3d(0, -1, 0, 90deg);
   }
@@ -31,15 +40,31 @@
   }
 }
 
-.card:hover {
-  transform: scale(1.1);
+.character-card:hover {
+  box-shadow: 0px 0px 2px 2px skyblue;
   cursor: pointer;
 }
 
-.card:active {
-  transform: scale(1);
+.character-card:active {
+  transform: scale(0.8);
+  transition: transform 300ms ease-in-out;
 }
 
-.card--character {
+.character--image {
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+.character--name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-family: "badaboom", "Comic Neue", cursive;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo-card {
   width: 100%;
 }

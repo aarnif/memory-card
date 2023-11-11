@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap");
 
+@font-face {
+  font-family: "badaboom";
+  src: url("src/assets/fonts/badaboom_bb/BADABB__.TTF");
+}
+
 :root {
   font-family: "Comic Neue", cursive;
   line-height: 1.5;
