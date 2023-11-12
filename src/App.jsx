@@ -20,8 +20,6 @@ function App() {
   const shownLevel = level + 1;
   // Divide by two because two cards are added each level
   const topLevel = gameCards.length / 2;
-  // Shuffle cards at each render
-  const shuffledCards = shuffleArray(gameCards);
   const clickedCards = gameCards.filter((card) => card.isClicked);
 
   const animationDuration = 700;
@@ -58,7 +56,7 @@ function App() {
       const playCard = gameCards.map((card) =>
         card.id === cardId ? { ...card, isClicked: true } : card
       );
-      setGameCards(playCard);
+      setGameCards(shuffleArray(playCard));
       showCardAnimation();
     } else {
       gameOver();
@@ -112,7 +110,7 @@ function App() {
         </main>
       ) : (
         <Cards
-          cards={shuffledCards}
+          cards={gameCards}
           playCard={playCard}
           showCard={showCard}
           animationDuration={animationDuration}
