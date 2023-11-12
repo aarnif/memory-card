@@ -42,6 +42,7 @@
 
 .character-card:hover {
   box-shadow: 0px 0px 2px 2px skyblue;
+  color: skyblue;
   cursor: pointer;
 }
 

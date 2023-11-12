@@ -2,7 +2,7 @@ import "./GameModal.css";
 
 const NewGameModal = ({ callback }) => {
   return (
-    <section className="game-modal">
+    <section className="game-modal-start">
       <div className="game-modal--content">
         <h1 className="game-modal--header">Welcome to Gotham City!</h1>
         <p className="game-modal--text">

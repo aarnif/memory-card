@@ -3,7 +3,7 @@ import "./GameModal.css";
 const GameModal = ({ level, topLevel, shownLevel, callback }) => {
   console.log(level === topLevel);
   return (
-    <section className="game-modal">
+    <section className="game-modal-end">
       <div className="game-modal--content">
         <h1 className="game-modal--header">Game Over!</h1>
 
