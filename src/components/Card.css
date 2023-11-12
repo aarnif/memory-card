@@ -26,10 +26,6 @@
   padding: var(--image-padding);
 }
 
-.character-card {
-  animation: rotate 700ms ease-in-out;
-}
-
 @keyframes rotate {
   0% {
     transform: rotate3d(0, -1, 0, 90deg);

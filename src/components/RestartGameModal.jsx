@@ -1,7 +1,6 @@
 import "./GameModal.css";
 
 const GameModal = ({ level, topLevel, shownLevel, callback }) => {
-  console.log(level === topLevel);
   return (
     <section className="game-modal-end">
       <div className="game-modal--content">

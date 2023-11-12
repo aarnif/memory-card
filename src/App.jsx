@@ -14,6 +14,7 @@ function App() {
   const [cardData, setCardData] = useState([]);
   const [gameCards, setGameCards] = useState([]);
   const [level, setLevel] = useState(0);
+  const [showCard, setShowCard] = useState(false);
 
   // Start counting levels from 1
   const shownLevel = level + 1;
@@ -22,6 +23,8 @@ function App() {
   // Shuffle cards at each render
   const shuffledCards = shuffleArray(gameCards);
   const clickedCards = gameCards.filter((card) => card.isClicked);
+
+  const animationDuration = 700;
 
   useEffect(() => {
     loadCardData().then((cardData) => {
@@ -56,6 +59,7 @@ function App() {
         card.id === cardId ? { ...card, isClicked: true } : card
       );
       setGameCards(playCard);
+      showCardAnimation();
     } else {
       gameOver();
     }
@@ -67,18 +71,27 @@ function App() {
     toggleOverlay();
     setLevelAnimation();
     setLevel(0);
+    showCardAnimation();
   };
 
   const nextLevel = () => {
     setLevel((prevState) => prevState + 1);
     setGameCards((prevState) => cardData.slice(0, prevState.length + 2));
     setLevelAnimation();
+    showCardAnimation();
   };
 
   const gameOver = () => {
     toggleOverlay();
     setIsGameOver((prevState) => !prevState);
     setGameCards(cardData.slice(0, 2));
+  };
+
+  const showCardAnimation = () => {
+    setShowCard(false);
+    setTimeout(() => {
+      setShowCard(true);
+    }, animationDuration);
   };
 
   return (
@@ -98,7 +111,12 @@ function App() {
           />
         </main>
       ) : (
-        <Cards cards={shuffledCards} playCard={playCard} />
+        <Cards
+          cards={shuffledCards}
+          playCard={playCard}
+          showCard={showCard}
+          animationDuration={animationDuration}
+        />
       )}
       <Footer />
       <div id="overlay" className="active"></div>

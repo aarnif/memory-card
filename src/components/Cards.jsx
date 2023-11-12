@@ -1,7 +1,8 @@
+import { forwardRef } from "react";
 import { Card } from "./Card";
 import "./Cards.css";
 
-export function Cards({ cards, playCard }) {
+export function Cards({ cards, playCard, showCard, animationDuration }) {
   return (
     <main className="wrapper">
       <div className="card-grid">
@@ -12,6 +13,8 @@ export function Cards({ cards, playCard }) {
             image={card.image}
             name={card.name}
             playCard={() => playCard(card.id)}
+            showCard={showCard}
+            animationDuration={animationDuration}
           />
         ))}
       </div>
