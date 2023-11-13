@@ -14,6 +14,8 @@ function App() {
   const [cardData, setCardData] = useState([]);
   const [gameCards, setGameCards] = useState([]);
   const [level, setLevel] = useState(0);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [showCard, setShowCard] = useState(false);
 
   // Start counting levels from 1
@@ -56,6 +58,7 @@ function App() {
       const playCard = gameCards.map((card) =>
         card.id === cardId ? { ...card, isClicked: true } : card
       );
+      setScore((prevState) => prevState + 1);
       setGameCards(shuffleArray(playCard));
       showCardAnimation();
     } else {
@@ -69,6 +72,7 @@ function App() {
     toggleOverlay();
     setLevelAnimation();
     setLevel(0);
+    setScore(0);
     showCardAnimation();
   };
 
@@ -83,6 +87,7 @@ function App() {
     toggleOverlay();
     setIsGameOver((prevState) => !prevState);
     setGameCards(cardData.slice(0, 2));
+    setHighScore((prevState) => (score > prevState ? score : prevState));
   };
 
   const showCardAnimation = () => {
@@ -94,7 +99,7 @@ function App() {
 
   return (
     <>
-      <Header level={shownLevel} />
+      <Header level={shownLevel} score={score} highScore={highScore} />
       {!isNewGame ? (
         <main className="main-content-modal">
           <NewGameModal callback={clickNewGame} />
