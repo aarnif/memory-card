@@ -1,7 +1,8 @@
 import "./Header.css";
 import DcComics from "../assets/other-images/dc_comics_logo.svg";
+import { Level } from "./Level";
 
-export function Header({ level, score, highScore }) {
+export function Header({ level, shownLevel, score, highScore }) {
   return (
     <header className="header">
       <ul className="header--logo-and-title">
@@ -16,7 +17,7 @@ export function Header({ level, score, highScore }) {
         <li>Score: {score}</li>
         <li>High Score: {highScore}</li>
       </ul>
-      <div className="header--level">Level {level}</div>
+      <Level level={level} shownlevel={shownLevel} />
     </header>
   );
 }

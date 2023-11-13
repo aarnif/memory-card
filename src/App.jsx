@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { loadCardData } from "./utils/loadCardData";
-import { shuffleArray, setLevelAnimation } from "./utils/game";
+import { shuffleArray } from "./utils/game";
 import "./App.css";
 import NewGameModal from "./components/NewGameModal";
 import RestartGameModal from "./components/RestartGameModal";
@@ -14,7 +14,7 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [cardData, setCardData] = useState([]);
   const [gameCards, setGameCards] = useState([]);
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState(null);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [showCard, setShowCard] = useState(false);
@@ -72,7 +72,6 @@ function App() {
     if (!isNewGame) setIsNewGame((prevState) => !prevState);
     else if (isGameOver) setIsGameOver((prevState) => !prevState);
     toggleOverlay();
-    setLevelAnimation();
     setLevel(0);
     setScore(0);
     showCardAnimation();
@@ -81,7 +80,6 @@ function App() {
   const nextLevel = () => {
     setLevel((prevState) => prevState + 1);
     setGameCards((prevState) => cardData.slice(0, prevState.length + 2));
-    setLevelAnimation();
     showCardAnimation();
   };
 
@@ -105,7 +103,12 @@ function App() {
 
   return (
     <>
-      <Header level={shownLevel} score={score} highScore={highScore} />
+      <Header
+        shownLevel={shownLevel}
+        level={level}
+        score={score}
+        highScore={highScore}
+      />
       {!isNewGame ? (
         <main className="main-content-modal">
           <NewGameModal callback={clickNewGame} />

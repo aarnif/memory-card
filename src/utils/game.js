@@ -5,11 +5,3 @@ export const shuffleArray = (array) => {
   }
   return array;
 };
-
-export const setLevelAnimation = () => {
-  const levelHeader = document.querySelector(".header--level");
-  levelHeader.classList.add("active");
-  setTimeout(() => {
-    levelHeader.classList.remove("active");
-  }, 1500);
-};
