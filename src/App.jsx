@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { loadCardData } from "./utils/loadCardData";
-import { shuffleArray, setLevelAnimation, toggleOverlay } from "./utils/game";
+import { shuffleArray, setLevelAnimation } from "./utils/game";
 import "./App.css";
 import NewGameModal from "./components/NewGameModal";
 import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
 import { Footer } from "./components/Footer";
+import { Overlay } from "./components/Overlay";
 
 function App() {
   const [isNewGame, setIsNewGame] = useState(false);
@@ -17,6 +18,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [showCard, setShowCard] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
 
   // Start counting levels from 1
   const shownLevel = level + 1;
@@ -97,6 +99,10 @@ function App() {
     }, animationDuration);
   };
 
+  const toggleOverlay = () => {
+    setShowOverlay((prevState) => !prevState);
+  };
+
   return (
     <>
       <Header level={shownLevel} score={score} highScore={highScore} />
@@ -122,7 +128,7 @@ function App() {
         />
       )}
       <Footer />
-      <div id="overlay" className="active"></div>
+      <Overlay showOverlay={showOverlay} />
     </>
   );
 }

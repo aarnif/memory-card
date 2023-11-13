@@ -13,8 +13,3 @@ export const setLevelAnimation = () => {
     levelHeader.classList.remove("active");
   }, 1500);
 };
-
-export const toggleOverlay = () => {
-  const overlay = document.getElementById("overlay");
-  overlay.classList.toggle("active");
-};
