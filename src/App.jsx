@@ -20,10 +20,11 @@ function App() {
   const [showCard, setShowCard] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
 
+  const cardsAddedPerLevel = 2;
   // Start counting levels from 1
   const shownLevel = level + 1;
   // Divide by two because two cards are added each level
-  const topLevel = gameCards.length / 2;
+  const topLevel = cardData.length / cardsAddedPerLevel;
   const clickedCards = gameCards.filter((card) => card.isClicked);
 
   const animationDuration = 700;
@@ -31,7 +32,7 @@ function App() {
   useEffect(() => {
     loadCardData().then((cardData) => {
       setCardData(shuffleArray(cardData));
-      setGameCards(cardData.slice(0, 2));
+      setGameCards(cardData.slice(0, cardsAddedPerLevel));
       console.log(cardData);
     });
   }, []);
@@ -79,14 +80,16 @@ function App() {
 
   const nextLevel = () => {
     setLevel((prevState) => prevState + 1);
-    setGameCards((prevState) => cardData.slice(0, prevState.length + 2));
+    setGameCards((prevState) =>
+      cardData.slice(0, prevState.length + cardsAddedPerLevel)
+    );
     showCardAnimation();
   };
 
   const gameOver = () => {
     toggleOverlay();
     setIsGameOver((prevState) => !prevState);
-    setGameCards(cardData.slice(0, 2));
+    setGameCards(cardData.slice(0, cardsAddedPerLevel));
     setHighScore((prevState) => (score > prevState ? score : prevState));
   };
 
