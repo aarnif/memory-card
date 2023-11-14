@@ -27,7 +27,7 @@ function App() {
   const topLevel = cardData.length / cardsAddedPerLevel;
   const clickedCards = gameCards.filter((card) => card.isClicked);
 
-  const animationDuration = 700;
+  const animationDuration = 1500;
 
   useEffect(() => {
     loadCardData().then((cardData) => {
@@ -37,7 +37,6 @@ function App() {
     });
   }, []);
 
-  // Check if top level has been reached
   useEffect(() => {
     if (checkIfTopLevelAchieved()) {
       gameOver();
@@ -62,8 +61,12 @@ function App() {
         card.id === cardId ? { ...card, isClicked: true } : card
       );
       setScore((prevState) => prevState + 1);
-      setGameCards(shuffleArray(playCard));
       showCardAnimation();
+      setTimeout(
+        // set cards in the middle of the animation
+        () => setGameCards(shuffleArray(playCard)),
+        animationDuration / 2
+      );
     } else {
       gameOver();
     }

@@ -26,16 +26,6 @@
   padding: var(--image-padding);
 }
 
-@keyframes rotate {
-  0% {
-    transform: rotate3d(0, -1, 0, 90deg);
-  }
-
-  100% {
-    transform: rotate3d(0, 0, 0, 0deg);
-  }
-}
-
 .character-card:hover {
   box-shadow: 0px 0px 2px 2px skyblue;
   color: skyblue;
@@ -47,7 +37,12 @@
   transition: transform 300ms ease-in-out;
 }
 
-.character--image {
+.logo-card {
+  height: 425px;
+}
+
+.character--image,
+.logo--image {
   width: 100%;
   border-radius: var(--border-radius);
 }
@@ -60,8 +55,4 @@
   font-family: "badaboom", "Comic Neue", cursive;
   font-size: 24px;
   font-weight: bold;
-}
-
-.logo-card {
-  width: 100%;
 }
