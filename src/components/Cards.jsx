@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import { Card } from "./Card";
 import "./Cards.css";
 

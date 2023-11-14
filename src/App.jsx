@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import useSound from "use-sound";
 import { loadCardData } from "./utils/loadCardData";
 import { shuffleArray } from "./utils/game";
 import "./App.css";
@@ -8,6 +9,7 @@ import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
 import { Footer } from "./components/Footer";
 import { Overlay } from "./components/Overlay";
+import cardFlip from "./assets/sounds/card_flip.wav";
 
 function App() {
   const [isNewGame, setIsNewGame] = useState(false);
@@ -20,13 +22,15 @@ function App() {
   const [showCard, setShowCard] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
 
+  const [playFlipSound] = useSound(cardFlip, { volume: 0.2 });
+
   const cardsAddedPerLevel = 2;
   // Start counting levels from 1
   const shownLevel = level + 1;
   // Divide by two because two cards are added each level
   const topLevel = cardData.length / cardsAddedPerLevel;
   const clickedCards = gameCards.filter((card) => card.isClicked);
-  const cardAnimationDuration = 1500;
+  const cardAnimationDuration = 1000;
 
   useEffect(() => {
     loadCardData().then((cardData) => {
@@ -86,7 +90,6 @@ function App() {
     setGameCards((prevState) =>
       cardData.slice(0, prevState.length + cardsAddedPerLevel)
     );
-    showCardAnimation();
   };
 
   const gameOver = () => {
@@ -98,8 +101,10 @@ function App() {
 
   const showCardAnimation = () => {
     setShowCard(false);
+    playFlipSound();
     setTimeout(() => {
       setShowCard(true);
+      playFlipSound();
     }, cardAnimationDuration);
   };
 
