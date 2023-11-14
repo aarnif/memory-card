@@ -11,7 +11,8 @@
 }
 
 .header--logo-and-title,
-.header--score {
+.header--score,
+.header--volume-icon-and-howler {
   all: unset;
   list-style: none;
   display: flex;
@@ -22,6 +23,19 @@
 .header--logo-and-title,
 .header--score {
   width: 380px;
+}
+
+.header--score {
+  width: 600px;
+  justify-content: space-around;
+}
+
+.header--volume-icon-and-howler {
+  width: 0px;
+}
+
+.header--music-howler {
+  width: 0px;
 }
 
 .header--logo-and-title > li {
@@ -42,4 +56,19 @@
 .header--title {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.header--volume-icon {
+  border: 2px solid #0077f2;
+  border-radius: 50%;
+  padding: 15px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header--volume-icon:hover {
+  border-color: skyblue;
+  cursor: pointer;
 }

@@ -21,6 +21,7 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   const [showCard, setShowCard] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
+  const [playMusic, setPlayMusic] = useState(true);
 
   const [playFlipSound] = useSound(cardFlip, { volume: 0.2 });
 
@@ -112,6 +113,10 @@ function App() {
     setShowOverlay((prevState) => !prevState);
   };
 
+  const togglePlayMusic = () => {
+    setPlayMusic((prevState) => !prevState);
+  };
+
   return (
     <>
       <Header
@@ -119,6 +124,8 @@ function App() {
         level={level}
         score={score}
         highScore={highScore}
+        playMusic={playMusic}
+        togglePlayMusic={togglePlayMusic}
       />
       {!isNewGame ? (
         <main className="main-content-modal">
