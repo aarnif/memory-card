@@ -26,14 +26,14 @@ function App() {
   // Divide by two because two cards are added each level
   const topLevel = cardData.length / cardsAddedPerLevel;
   const clickedCards = gameCards.filter((card) => card.isClicked);
-
-  const animationDuration = 1500;
+  const cardAnimationDuration = 1500;
 
   useEffect(() => {
     loadCardData().then((cardData) => {
-      setCardData(shuffleArray(cardData));
-      setGameCards(cardData.slice(0, cardsAddedPerLevel));
-      console.log(cardData);
+      const shuffledCardData = shuffleArray(cardData);
+      setCardData(shuffledCardData);
+      setGameCards(shuffledCardData.slice(0, cardsAddedPerLevel));
+      console.log(shuffledCardData);
     });
   }, []);
 
@@ -65,7 +65,7 @@ function App() {
       setTimeout(
         // set cards in the middle of the animation
         () => setGameCards(shuffleArray(playCard)),
-        animationDuration / 2
+        cardAnimationDuration / 2
       );
     } else {
       gameOver();
@@ -100,7 +100,7 @@ function App() {
     setShowCard(false);
     setTimeout(() => {
       setShowCard(true);
-    }, animationDuration);
+    }, cardAnimationDuration);
   };
 
   const toggleOverlay = () => {
@@ -133,7 +133,7 @@ function App() {
           cards={gameCards}
           playCard={playCard}
           showCard={showCard}
-          animationDuration={animationDuration}
+          animationDuration={cardAnimationDuration}
         />
       )}
       <Footer />
