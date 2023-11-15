@@ -20,7 +20,6 @@ const characterNames = [
 // Load all images dynamically from directory
 export const loadCardData = async () => {
   const importAll = import.meta.glob("../assets/card-images/*.png"); // must use literal as path
-  console.log(importAll);
   let index = 0;
   const cards = [];
 

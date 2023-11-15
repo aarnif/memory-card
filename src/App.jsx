@@ -21,24 +21,21 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   const [showCard, setShowCard] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
-  const [playMusic, setPlayMusic] = useState(true);
+  const [playMusic, setPlayMusic] = useState(false);
 
-  const [playFlipSound] = useSound(cardFlip, { volume: 0.2 });
+  const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
 
   const cardsAddedPerLevel = 2;
   // Start counting levels from 1
   const shownLevel = level + 1;
-  // Divide by two because two cards are added each level
   const topLevel = cardData.length / cardsAddedPerLevel;
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const cardAnimationDuration = 1000;
 
   useEffect(() => {
     loadCardData().then((cardData) => {
-      const shuffledCardData = shuffleArray(cardData);
-      setCardData(shuffledCardData);
-      setGameCards(shuffledCardData.slice(0, cardsAddedPerLevel));
-      console.log(shuffledCardData);
+      setCardData(cardData);
+      console.log("Card data loaded!");
     });
   }, []);
 
@@ -50,6 +47,8 @@ function App() {
 
   useEffect(() => {
     if (checkIfAllCardsAreClicked()) {
+      console.log("Current game cards:");
+      console.table(gameCards);
       nextLevel();
     }
   }, [clickedCards, gameCards]);
@@ -58,6 +57,30 @@ function App() {
     gameCards.length > 0 && clickedCards.length === gameCards.length;
 
   const checkIfTopLevelAchieved = () => topLevel === level;
+
+  const resetClickedCards = () => {
+    return gameCards.map((card) => ({ ...card, isClicked: false }));
+  };
+
+  const addNewCards = () => {
+    const newGameCards = [];
+    const shuffledCardData = shuffleArray(cardData);
+    let counter = 0;
+    let index = 0;
+    while (counter < cardsAddedPerLevel) {
+      const findCard = gameCards.find(
+        (card) => card.id === shuffledCardData[index].id
+      );
+      if (!findCard) {
+        console.log("Add a new card to gamecards:");
+        console.log(shuffledCardData[index]);
+        newGameCards.push(shuffledCardData[index]);
+        counter++;
+      }
+      index++;
+    }
+    return [...resetClickedCards(), ...newGameCards];
+  };
 
   const playCard = (cardId) => {
     const findCard = clickedCards.find((card) => card.id === cardId);
@@ -81,26 +104,30 @@ function App() {
     if (!isNewGame) setIsNewGame((prevState) => !prevState);
     else if (isGameOver) setIsGameOver((prevState) => !prevState);
     toggleOverlay();
+    const shuffledCardData = shuffleArray(cardData);
+    setGameCards(shuffledCardData.slice(0, cardsAddedPerLevel));
     setLevel(0);
     setScore(0);
     showCardAnimation();
+    console.log("New game started!");
+    console.log(`First level ${shownLevel}!`);
   };
 
   const nextLevel = () => {
     setLevel((prevState) => prevState + 1);
-    setGameCards((prevState) =>
-      cardData.slice(0, prevState.length + cardsAddedPerLevel)
-    );
+    setGameCards(addNewCards());
+    console.log(`Next level ${shownLevel + 1}!`);
   };
 
   const gameOver = () => {
     toggleOverlay();
     setIsGameOver((prevState) => !prevState);
-    setGameCards(cardData.slice(0, cardsAddedPerLevel));
     setHighScore((prevState) => (score > prevState ? score : prevState));
+    console.log("Game over!");
   };
 
   const showCardAnimation = () => {
+    console.log("Card animation started!");
     setShowCard(false);
     playFlipSound();
     setTimeout(() => {
@@ -110,10 +137,12 @@ function App() {
   };
 
   const toggleOverlay = () => {
+    console.log("Overlay toggled!");
     setShowOverlay((prevState) => !prevState);
   };
 
   const togglePlayMusic = () => {
+    console.log("Music toggled!");
     setPlayMusic((prevState) => !prevState);
   };
 
