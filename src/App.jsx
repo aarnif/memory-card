@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useSound from "use-sound";
-import { loadCardData } from "./utils/loadCardData";
+import { characters } from "./utils/characterData";
 import { shuffleArray } from "./utils/game";
 import "./App.css";
 import NewGameModal from "./components/NewGameModal";
@@ -14,7 +14,7 @@ import cardFlip from "./assets/sounds/card_flip.wav";
 function App() {
   const [isNewGame, setIsNewGame] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [cardData, setCardData] = useState([]);
+  const [cardData, setCardData] = useState(characters);
   const [gameCards, setGameCards] = useState([]);
   const [level, setLevel] = useState(null);
   const [score, setScore] = useState(0);
@@ -31,13 +31,6 @@ function App() {
   const topLevel = cardData.length / cardsAddedPerLevel;
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const cardAnimationDuration = 1000;
-
-  useEffect(() => {
-    loadCardData().then((cardData) => {
-      setCardData(cardData);
-      console.log("Card data loaded!");
-    });
-  }, []);
 
   useEffect(() => {
     if (checkIfTopLevelAchieved()) {
