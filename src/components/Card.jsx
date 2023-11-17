@@ -2,7 +2,7 @@ import "./Card.css";
 import { motion, AnimatePresence } from "framer-motion";
 import DcComics from "../assets/other-images/dc_comics_logo.svg";
 
-export function Card({ playCard, image, name, showCard, animationDuration }) {
+export function Card({ playCard, image, name, flipCard, animationDuration }) {
   const duration = animationDuration / 1000;
   const initial = {
     rotateY: -90,
@@ -21,7 +21,7 @@ export function Card({ playCard, image, name, showCard, animationDuration }) {
 
   return (
     <AnimatePresence mode="wait">
-      {showCard ? (
+      {flipCard ? (
         <motion.div
           key={image}
           className="character-card"

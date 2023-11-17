@@ -1,7 +1,7 @@
 import { Card } from "./Card";
 import "./Cards.css";
 
-export function Cards({ cards, playCard, showCard, animationDuration }) {
+export function Cards({ cards, playCard, flipCard, animationDuration }) {
   return (
     <main className="wrapper">
       <div className="card-grid">
@@ -12,7 +12,7 @@ export function Cards({ cards, playCard, showCard, animationDuration }) {
             image={card.image}
             name={card.name}
             playCard={() => playCard(card.id)}
-            showCard={showCard}
+            flipCard={flipCard}
             animationDuration={animationDuration}
           />
         ))}

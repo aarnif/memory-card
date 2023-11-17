@@ -17,17 +17,15 @@ function App() {
   const [cardData, setCardData] = useState(characters);
   const [gameCards, setGameCards] = useState([]);
   const [level, setLevel] = useState(null);
-  const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
-  const [showCard, setShowCard] = useState(false);
+  const [highScore, setHighScore] = useState(null);
+  const [flipCard, setFlipCard] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
   const [playMusic, setPlayMusic] = useState(false);
+  const [gameEndResult, setGameEndResult] = useState(null);
 
   const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
 
   const cardsAddedPerLevel = 2;
-  // Start counting levels from 1
-  const shownLevel = level + 1;
   const topLevel = cardData.length / cardsAddedPerLevel;
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const cardAnimationDuration = 1000;
@@ -65,7 +63,7 @@ function App() {
         (card) => card.id === shuffledCardData[index].id
       );
       if (!findCard) {
-        console.log("Add a new card to gamecards:");
+        console.log("Add new card:");
         console.log(shuffledCardData[index]);
         newGameCards.push(shuffledCardData[index]);
         counter++;
@@ -81,7 +79,6 @@ function App() {
       const playCard = gameCards.map((card) =>
         card.id === cardId ? { ...card, isClicked: true } : card
       );
-      setScore((prevState) => prevState + 1);
       showCardAnimation();
       setTimeout(
         // set cards in the middle of the animation
@@ -96,8 +93,7 @@ function App() {
   const resetGame = () => {
     const shuffledCardData = shuffleArray(cardData);
     setGameCards(shuffledCardData.slice(0, cardsAddedPerLevel));
-    setLevel(0);
-    setScore(0);
+    setLevel(1);
     showCardAnimation();
   };
 
@@ -106,7 +102,7 @@ function App() {
     toggleOverlay();
     resetGame();
     console.log("New game started!");
-    console.log(`First level ${shownLevel}!`);
+    console.log(`First level ${level}!`);
   };
 
   const clickRestartGame = () => {
@@ -114,28 +110,31 @@ function App() {
     toggleOverlay();
     resetGame();
     console.log("Restart game!");
-    console.log(`First level ${shownLevel}!`);
+    console.log(`First level ${level}!`);
   };
 
   const nextLevel = () => {
-    setLevel((prevState) => prevState + 1);
+    const nextLevel = level + 1;
+    setLevel(nextLevel);
     setGameCards(addNewCards());
-    console.log(`Next level ${shownLevel + 1}!`);
+    console.log(`Next level ${nextLevel}!`);
   };
 
   const gameOver = () => {
     toggleOverlay();
     setIsGameOver((prevState) => !prevState);
-    setHighScore((prevState) => (score > prevState ? score : prevState));
+    setHighScore((prevState) => (level > prevState ? level : prevState));
+    setGameEndResult(level);
+    setLevel(null);
     console.log("Game over!");
   };
 
   const showCardAnimation = () => {
     console.log("Card animation started!");
-    setShowCard(false);
+    setFlipCard(false);
     playFlipSound();
     setTimeout(() => {
-      setShowCard(true);
+      setFlipCard(true);
       playFlipSound();
     }, cardAnimationDuration);
   };
@@ -153,9 +152,7 @@ function App() {
   return (
     <>
       <Header
-        shownLevel={shownLevel}
         level={level}
-        score={score}
         highScore={highScore}
         playMusic={playMusic}
         togglePlayMusic={togglePlayMusic}
@@ -167,9 +164,8 @@ function App() {
       ) : isGameOver ? (
         <main className="main-content-modal">
           <RestartGameModal
-            level={level}
+            gameEndResult={gameEndResult}
             topLevel={topLevel}
-            shownLevel={shownLevel}
             callback={clickRestartGame}
           />
         </main>
@@ -177,7 +173,7 @@ function App() {
         <Cards
           cards={gameCards}
           playCard={playCard}
-          showCard={showCard}
+          flipCard={flipCard}
           animationDuration={cardAnimationDuration}
         />
       )}

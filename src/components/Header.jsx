@@ -7,14 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import { faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
 
-export function Header({
-  level,
-  shownLevel,
-  score,
-  highScore,
-  playMusic,
-  togglePlayMusic,
-}) {
+export function Header({ level, highScore, playMusic, togglePlayMusic }) {
   const volumeIconStyle = {
     color: "#0077f2",
     "&:hover": {
@@ -33,7 +26,7 @@ export function Header({
         </li>
       </ul>
       <ul className="header--score">
-        <li>Score: {score}</li>
+        <li>Level: {level}</li>
         <li>High Score: {highScore}</li>
         <li className="header--volume-icon" onClick={togglePlayMusic}>
           {playMusic ? (
@@ -48,7 +41,7 @@ export function Header({
           )}
         </li>
       </ul>
-      <Level level={level} shownlevel={shownLevel} />
+      <Level key={level} level={level} />
     </header>
   );
 }
