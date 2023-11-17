@@ -93,16 +93,27 @@ function App() {
     }
   };
 
-  const clickNewGame = () => {
-    if (!isNewGame) setIsNewGame((prevState) => !prevState);
-    else if (isGameOver) setIsGameOver((prevState) => !prevState);
-    toggleOverlay();
+  const resetGame = () => {
     const shuffledCardData = shuffleArray(cardData);
     setGameCards(shuffledCardData.slice(0, cardsAddedPerLevel));
     setLevel(0);
     setScore(0);
     showCardAnimation();
+  };
+
+  const clickNewGame = () => {
+    setIsNewGame((prevState) => !prevState);
+    toggleOverlay();
+    resetGame();
     console.log("New game started!");
+    console.log(`First level ${shownLevel}!`);
+  };
+
+  const clickRestartGame = () => {
+    setIsGameOver((prevState) => !prevState);
+    toggleOverlay();
+    resetGame();
+    console.log("Restart game!");
     console.log(`First level ${shownLevel}!`);
   };
 
@@ -159,7 +170,7 @@ function App() {
             level={level}
             topLevel={topLevel}
             shownLevel={shownLevel}
-            callback={clickNewGame}
+            callback={clickRestartGame}
           />
         </main>
       ) : (
