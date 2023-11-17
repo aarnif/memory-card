@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import useSound from "use-sound";
 import { characters } from "./utils/characterData";
-import { shuffleArray } from "./utils/game";
+import {
+  shuffleArray,
+  checkIfAllCardsHaveBeenClicked,
+  checkIfTopLevelAchieved,
+  resetCards,
+  addNewLevelToCards,
+} from "./utils/game";
 import "./App.css";
 import NewGameModal from "./components/NewGameModal";
 import RestartGameModal from "./components/RestartGameModal";
@@ -12,10 +18,9 @@ import { Overlay } from "./components/Overlay";
 import cardFlip from "./assets/sounds/card_flip.wav";
 
 function App() {
-  const [isNewGame, setIsNewGame] = useState(false);
+  const [isGameStart, setIsGameStart] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [cardData, setCardData] = useState(characters);
-  const [gameCards, setGameCards] = useState([]);
+  const [gameCards, setGameCards] = useState(characters);
   const [level, setLevel] = useState(null);
   const [highScore, setHighScore] = useState(null);
   const [flipCard, setFlipCard] = useState(false);
@@ -26,52 +31,25 @@ function App() {
   const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
 
   const cardsAddedPerLevel = 2;
-  const topLevel = cardData.length / cardsAddedPerLevel;
-  const clickedCards = gameCards.filter((card) => card.isClicked);
+  const topLevel = gameCards.length / cardsAddedPerLevel;
   const cardAnimationDuration = 1000;
 
+  const clickedCards = gameCards.filter((card) => card.isClicked);
+  const shownCards = gameCards.filter((card) => card.isShown);
+
   useEffect(() => {
-    if (checkIfTopLevelAchieved()) {
+    if (checkIfTopLevelAchieved(topLevel, level)) {
       gameOver();
     }
   }, [level]);
 
   useEffect(() => {
-    if (checkIfAllCardsAreClicked()) {
+    if (checkIfAllCardsHaveBeenClicked(clickedCards, shownCards)) {
       console.log("Current game cards:");
       console.table(gameCards);
       nextLevel();
     }
   }, [clickedCards, gameCards]);
-
-  const checkIfAllCardsAreClicked = () =>
-    gameCards.length > 0 && clickedCards.length === gameCards.length;
-
-  const checkIfTopLevelAchieved = () => topLevel === level;
-
-  const resetClickedCards = () => {
-    return gameCards.map((card) => ({ ...card, isClicked: false }));
-  };
-
-  const addNewCards = () => {
-    const newGameCards = [];
-    const shuffledCardData = shuffleArray(cardData);
-    let counter = 0;
-    let index = 0;
-    while (counter < cardsAddedPerLevel) {
-      const findCard = gameCards.find(
-        (card) => card.id === shuffledCardData[index].id
-      );
-      if (!findCard) {
-        console.log("Add new card:");
-        console.log(shuffledCardData[index]);
-        newGameCards.push(shuffledCardData[index]);
-        counter++;
-      }
-      index++;
-    }
-    return [...resetClickedCards(), ...newGameCards];
-  };
 
   const playCard = (cardId) => {
     const findCard = clickedCards.find((card) => card.id === cardId);
@@ -91,14 +69,13 @@ function App() {
   };
 
   const resetGame = () => {
-    const shuffledCardData = shuffleArray(cardData);
-    setGameCards(shuffledCardData.slice(0, cardsAddedPerLevel));
     setLevel(1);
     showCardAnimation();
+    setGameCards((prevState) => resetCards(characters, cardsAddedPerLevel));
   };
 
   const clickNewGame = () => {
-    setIsNewGame((prevState) => !prevState);
+    setIsGameStart((prevState) => !prevState);
     toggleOverlay();
     resetGame();
     console.log("New game started!");
@@ -114,9 +91,10 @@ function App() {
   };
 
   const nextLevel = () => {
-    const nextLevel = level + 1;
-    setLevel(nextLevel);
-    setGameCards(addNewCards());
+    setLevel((prevState) => prevState + 1);
+    setGameCards((prevState) =>
+      addNewLevelToCards(gameCards, cardsAddedPerLevel)
+    );
     console.log(`Next level ${nextLevel}!`);
   };
 
@@ -157,7 +135,7 @@ function App() {
         playMusic={playMusic}
         togglePlayMusic={togglePlayMusic}
       />
-      {!isNewGame ? (
+      {!isGameStart ? (
         <main className="main-content-modal">
           <NewGameModal callback={clickNewGame} />
         </main>
@@ -171,7 +149,7 @@ function App() {
         </main>
       ) : (
         <Cards
-          cards={gameCards}
+          cards={shownCards}
           playCard={playCard}
           flipCard={flipCard}
           animationDuration={cardAnimationDuration}
