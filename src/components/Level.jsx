@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import "./Level.css";
 
-export function Level({ level, shownlevel }) {
+export function Level({ level }) {
   const animate = {
     opacity: [0, 1, 0],
     fontSize: [
@@ -21,7 +21,7 @@ export function Level({ level, shownlevel }) {
       animate={animate}
       transition={transition}
     >
-      Level {shownlevel}
+      Level {level}
     </motion.div>
   );
 }

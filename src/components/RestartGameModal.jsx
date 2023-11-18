@@ -1,12 +1,12 @@
 import "./GameModal.css";
 
-const GameModal = ({ level, topLevel, shownLevel, callback }) => {
+const GameModal = ({ gameEndResult, topLevel, callback }) => {
   return (
     <section className="game-modal-end">
       <div className="game-modal--content">
         <h1 className="game-modal--header">Game Over!</h1>
 
-        {level === topLevel ? (
+        {gameEndResult === topLevel ? (
           <>
             <p className="game-modal--text">
               {"Congratulations!"}
@@ -17,7 +17,7 @@ const GameModal = ({ level, topLevel, shownLevel, callback }) => {
         ) : (
           <>
             <p className="game-modal--text">
-              {`You reached level ${shownLevel}!`}
+              {`You reached level ${gameEndResult}!`}
               <br></br>
               {"Ready to try again?"}
             </p>
