@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
-import { characters } from "./utils/characterData";
 import {
-  shuffleArray,
+  iniatilizeCards,
+  showNewCards,
+  resetDeck,
+  shuffleDeck,
+} from "./reducers/cards";
+import {
   checkIfAllCardsHaveBeenClicked,
   checkIfTopLevelAchieved,
-  resetCards,
-  addNewLevelToCards,
 } from "./utils/game";
 import "./App.css";
 import NewGameModal from "./components/NewGameModal";
@@ -18,9 +21,10 @@ import { Overlay } from "./components/Overlay";
 import cardFlip from "./assets/sounds/card_flip.wav";
 
 function App() {
+  const gameCards = useSelector((state) => state.cards);
+
   const [isGameStart, setIsGameStart] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [gameCards, setGameCards] = useState(characters);
   const [level, setLevel] = useState(null);
   const [highScore, setHighScore] = useState(null);
   const [flipCard, setFlipCard] = useState(false);
@@ -33,9 +37,14 @@ function App() {
   const cardsAddedPerLevel = 2;
   const topLevel = gameCards.length / cardsAddedPerLevel;
   const cardAnimationDuration = 1000;
-
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const shownCards = gameCards.filter((card) => card.isShown);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(iniatilizeCards());
+  }, []);
 
   useEffect(() => {
     if (checkIfTopLevelAchieved(topLevel, level)) {
@@ -60,7 +69,7 @@ function App() {
       showCardAnimation();
       setTimeout(
         // set cards in the middle of the animation
-        () => setGameCards(shuffleArray(playCard)),
+        () => dispatch(shuffleDeck(playCard)),
         cardAnimationDuration / 2
       );
     } else {
@@ -71,7 +80,7 @@ function App() {
   const resetGame = () => {
     setLevel(1);
     showCardAnimation();
-    setGameCards((prevState) => resetCards(characters, cardsAddedPerLevel));
+    dispatch(resetDeck(gameCards, cardsAddedPerLevel));
   };
 
   const clickNewGame = () => {
@@ -92,10 +101,8 @@ function App() {
 
   const nextLevel = () => {
     setLevel((prevState) => prevState + 1);
-    setGameCards((prevState) =>
-      addNewLevelToCards(gameCards, cardsAddedPerLevel)
-    );
-    console.log(`Next level ${nextLevel}!`);
+    dispatch(showNewCards(gameCards, cardsAddedPerLevel));
+    console.log(`Next level ${level}!`);
   };
 
   const gameOver = () => {
