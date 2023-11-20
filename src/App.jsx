@@ -8,6 +8,15 @@ import {
   shuffleDeck,
 } from "./reducers/cards";
 import {
+  toggleGameStart,
+  toggleGameOver,
+  increaseGameLevel,
+  setGameLeveltoNull,
+  setGameResult,
+  updateHighScore,
+  resetLevel,
+} from "./reducers/game";
+import {
   checkIfAllCardsHaveBeenClicked,
   checkIfTopLevelAchieved,
 } from "./utils/game";
@@ -22,20 +31,24 @@ import cardFlip from "./assets/sounds/card_flip.wav";
 
 function App() {
   const gameCards = useSelector((state) => state.cards);
+  const gameState = useSelector((state) => state.game);
 
-  const [isGameStart, setIsGameStart] = useState(false);
-  const [isGameOver, setIsGameOver] = useState(false);
-  const [level, setLevel] = useState(null);
-  const [highScore, setHighScore] = useState(null);
+  const {
+    isGameStart,
+    isGameOver,
+    level,
+    gameEndResult,
+    highScore,
+    cardsAddedPerLevel,
+    topLevel,
+  } = gameState;
+
   const [flipCard, setFlipCard] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
   const [playMusic, setPlayMusic] = useState(false);
-  const [gameEndResult, setGameEndResult] = useState(null);
 
   const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
 
-  const cardsAddedPerLevel = 2;
-  const topLevel = gameCards.length / cardsAddedPerLevel;
   const cardAnimationDuration = 1000;
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const shownCards = gameCards.filter((card) => card.isShown);
@@ -78,13 +91,13 @@ function App() {
   };
 
   const resetGame = () => {
-    setLevel(1);
     showCardAnimation();
     dispatch(resetDeck(gameCards, cardsAddedPerLevel));
+    dispatch(resetLevel());
   };
 
   const clickNewGame = () => {
-    setIsGameStart((prevState) => !prevState);
+    dispatch(toggleGameStart());
     toggleOverlay();
     resetGame();
     console.log("New game started!");
@@ -92,7 +105,7 @@ function App() {
   };
 
   const clickRestartGame = () => {
-    setIsGameOver((prevState) => !prevState);
+    dispatch(toggleGameOver());
     toggleOverlay();
     resetGame();
     console.log("Restart game!");
@@ -100,17 +113,18 @@ function App() {
   };
 
   const nextLevel = () => {
-    setLevel((prevState) => prevState + 1);
+    dispatch(increaseGameLevel());
     dispatch(showNewCards(gameCards, cardsAddedPerLevel));
     console.log(`Next level ${level}!`);
   };
 
   const gameOver = () => {
     toggleOverlay();
-    setIsGameOver((prevState) => !prevState);
-    setHighScore((prevState) => (level > prevState ? level : prevState));
-    setGameEndResult(level);
-    setLevel(null);
+
+    dispatch(toggleGameOver());
+    dispatch(updateHighScore());
+    dispatch(setGameResult());
+    dispatch(setGameLeveltoNull());
     console.log("Game over!");
   };
 
