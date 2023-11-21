@@ -1,6 +1,32 @@
 import "./GameModal.css";
+import { useSelector, useDispatch } from "react-redux";
+import { resetLevel, toggleGameOver } from "../reducers/game";
+import { resetDeck } from "../reducers/cards";
+import {
+  toggleShowOverlayAction,
+  showCardAnimationAction,
+} from "../reducers/display";
+import useSound from "use-sound";
+import cardFlip from "../assets/sounds/card_flip.wav";
 
-const GameModal = ({ gameEndResult, topLevel, callback }) => {
+const GameModal = () => {
+  const gameCards = useSelector((state) => state.cards);
+  const gameState = useSelector((state) => state.game);
+
+  const { level, gameEndResult, cardsAddedPerLevel, topLevel } = gameState;
+
+  const dispatch = useDispatch();
+  const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
+
+  const clickRestartGame = () => {
+    dispatch(toggleGameOver());
+    dispatch(toggleShowOverlayAction());
+    dispatch(showCardAnimationAction(playFlipSound));
+    dispatch(resetDeck(gameCards, cardsAddedPerLevel));
+    dispatch(resetLevel());
+    console.log("Restart game!");
+    console.log(`First level ${level}!`);
+  };
   return (
     <section className="game-modal-end">
       <div className="game-modal--content">
@@ -23,7 +49,10 @@ const GameModal = ({ gameEndResult, topLevel, callback }) => {
             </p>
           </>
         )}
-        <button className="game-modal--new-game-button" onClick={callback}>
+        <button
+          className="game-modal--new-game-button"
+          onClick={clickRestartGame}
+        >
           New Game
         </button>
       </div>

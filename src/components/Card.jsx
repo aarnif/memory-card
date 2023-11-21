@@ -1,9 +1,13 @@
 import "./Card.css";
 import { motion, AnimatePresence } from "framer-motion";
 import DcComics from "../assets/other-images/dc_comics_logo.svg";
+import { useSelector } from "react-redux";
 
-export function Card({ playCard, image, name, flipCard, animationDuration }) {
-  const duration = animationDuration / 1000;
+export function Card({ image, name, playCard }) {
+  const displayState = useSelector((state) => state.display);
+  const { flipCard, cardAnimationDuration } = displayState;
+
+  const duration = cardAnimationDuration / 1000;
   const initial = {
     rotateY: -90,
   };

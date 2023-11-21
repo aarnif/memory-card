@@ -6,8 +6,23 @@ import ReactHowler from "react-howler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import { faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
+import { useSelector, useDispatch } from "react-redux";
+import { togglePlayMusicAction } from "../reducers/display";
 
-export function Header({ level, highScore, playMusic, togglePlayMusic }) {
+export function Header() {
+  const gameState = useSelector((state) => state.game);
+  const displayState = useSelector((state) => state.display);
+
+  const { level, highScore } = gameState;
+  const { playMusic } = displayState;
+
+  const dispatch = useDispatch();
+
+  const togglePlayMusic = () => {
+    console.log("Music toggled!");
+    dispatch(togglePlayMusicAction());
+  };
+
   const volumeIconStyle = {
     color: "#0077f2",
     "&:hover": {
