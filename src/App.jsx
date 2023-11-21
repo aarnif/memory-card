@@ -17,6 +17,12 @@ import {
   resetLevel,
 } from "./reducers/game";
 import {
+  toggleFlipCardAction,
+  toggleShowOverlayAction,
+  togglePlayMusicAction,
+  showCardAnimationAction,
+} from "./reducers/display";
+import {
   checkIfAllCardsHaveBeenClicked,
   checkIfTopLevelAchieved,
 } from "./utils/game";
@@ -32,6 +38,8 @@ import cardFlip from "./assets/sounds/card_flip.wav";
 function App() {
   const gameCards = useSelector((state) => state.cards);
   const gameState = useSelector((state) => state.game);
+  const displayState = useSelector((state) => state.display);
+  const dispatch = useDispatch();
 
   const {
     isGameStart,
@@ -43,17 +51,13 @@ function App() {
     topLevel,
   } = gameState;
 
-  const [flipCard, setFlipCard] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true);
-  const [playMusic, setPlayMusic] = useState(false);
+  const { flipCard, showOverlay, playMusic, cardAnimationDuration } =
+    displayState;
 
   const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
 
-  const cardAnimationDuration = 1000;
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const shownCards = gameCards.filter((card) => card.isShown);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(iniatilizeCards());
@@ -79,7 +83,7 @@ function App() {
       const playCard = gameCards.map((card) =>
         card.id === cardId ? { ...card, isClicked: true } : card
       );
-      showCardAnimation();
+      dispatch(showCardAnimationAction(playFlipSound));
       setTimeout(
         // set cards in the middle of the animation
         () => dispatch(shuffleDeck(playCard)),
@@ -91,14 +95,14 @@ function App() {
   };
 
   const resetGame = () => {
-    showCardAnimation();
+    dispatch(showCardAnimationAction(playFlipSound));
     dispatch(resetDeck(gameCards, cardsAddedPerLevel));
     dispatch(resetLevel());
   };
 
   const clickNewGame = () => {
     dispatch(toggleGameStart());
-    toggleOverlay();
+    dispatch(toggleShowOverlayAction());
     resetGame();
     console.log("New game started!");
     console.log(`First level ${level}!`);
@@ -106,7 +110,7 @@ function App() {
 
   const clickRestartGame = () => {
     dispatch(toggleGameOver());
-    toggleOverlay();
+    dispatch(toggleShowOverlayAction());
     resetGame();
     console.log("Restart game!");
     console.log(`First level ${level}!`);
@@ -119,8 +123,7 @@ function App() {
   };
 
   const gameOver = () => {
-    toggleOverlay();
-
+    dispatch(toggleShowOverlayAction());
     dispatch(toggleGameOver());
     dispatch(updateHighScore());
     dispatch(setGameResult());
@@ -128,24 +131,9 @@ function App() {
     console.log("Game over!");
   };
 
-  const showCardAnimation = () => {
-    console.log("Card animation started!");
-    setFlipCard(false);
-    playFlipSound();
-    setTimeout(() => {
-      setFlipCard(true);
-      playFlipSound();
-    }, cardAnimationDuration);
-  };
-
-  const toggleOverlay = () => {
-    console.log("Overlay toggled!");
-    setShowOverlay((prevState) => !prevState);
-  };
-
   const togglePlayMusic = () => {
     console.log("Music toggled!");
-    setPlayMusic((prevState) => !prevState);
+    dispatch(togglePlayMusicAction());
   };
 
   return (

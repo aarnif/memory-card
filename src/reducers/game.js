@@ -30,7 +30,6 @@ const gameSlice = createSlice({
       state.level = null;
     },
     resetLevel(state, action) {
-      console.log("action payload:", action.payload);
       state.level = 1;
     },
     setGameEndResult(state, action) {
