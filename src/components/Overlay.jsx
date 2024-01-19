@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
-export function Overlay({ showOverlay }) {
+export function Overlay() {
+  const displayState = useSelector((state) => state.display);
+
+  const { showOverlay } = displayState;
+
   const start = {
     opacity: 0,
     pointerEvents: "none",

@@ -1,20 +1,20 @@
 import { v4 as uuidv4 } from "uuid";
-import alfredPennyworth from "../assets/card-images/alfred-pennyworth.png";
-import bane from "../assets/card-images/bane.png";
-import batman from "../assets/card-images/batman.png";
-import batgirl from "../assets/card-images/batwoman.png";
-import carmineFalcone from "../assets/card-images/carmine-falcone.png";
-import catwoman from "../assets/card-images/catwoman.png";
-import harleyQuinn from "../assets/card-images/harley-quinn.png";
-import jimGordon from "../assets/card-images/jim-gordon.png";
-import joker from "../assets/card-images/joker.png";
-import nightwing from "../assets/card-images/nightwing.png";
-import poisonIvy from "../assets/card-images/poison-ivy.png";
-import rasAlGhul from "../assets/card-images/ras-al-ghul.png";
-import riddler from "../assets/card-images/riddler.png";
-import robin from "../assets/card-images/robin.png";
-import scarecrow from "../assets/card-images/scarecrow.png";
-import taliaAlGhul from "../assets/card-images/thalia-al-ghul.png";
+import alfredPennyworth from "./assets/card-images/alfred-pennyworth.png";
+import bane from "./assets/card-images/bane.png";
+import batman from "./assets/card-images/batman.png";
+import batgirl from "./assets/card-images/batwoman.png";
+import carmineFalcone from "./assets/card-images/carmine-falcone.png";
+import catwoman from "./assets/card-images/catwoman.png";
+import harleyQuinn from "./assets/card-images/harley-quinn.png";
+import jimGordon from "./assets/card-images/jim-gordon.png";
+import joker from "./assets/card-images/joker.png";
+import nightwing from "./assets/card-images/nightwing.png";
+import poisonIvy from "./assets/card-images/poison-ivy.png";
+import rasAlGhul from "./assets/card-images/ras-al-ghul.png";
+import riddler from "./assets/card-images/riddler.png";
+import robin from "./assets/card-images/robin.png";
+import scarecrow from "./assets/card-images/scarecrow.png";
+import taliaAlGhul from "./assets/card-images/thalia-al-ghul.png";
 
 export const characters = [
   {
