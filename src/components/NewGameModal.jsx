@@ -4,7 +4,7 @@ import { toggleGameStart, resetLevel } from "../reducers/game";
 import { resetDeck } from "../reducers/cards";
 import {
   toggleShowOverlayAction,
-  showCardAnimationAction,
+  setNewGameCardAnimationAction,
 } from "../reducers/display";
 import useSound from "use-sound";
 import cardFlip from "../assets/sounds/card_flip.wav";
@@ -21,7 +21,7 @@ const NewGameModal = () => {
   const clickNewGame = () => {
     dispatch(toggleGameStart());
     dispatch(toggleShowOverlayAction());
-    dispatch(showCardAnimationAction(playFlipSound));
+    dispatch(setNewGameCardAnimationAction(playFlipSound));
     dispatch(resetDeck(gameCards, cardsAddedPerLevel));
     dispatch(resetLevel());
     console.log("New game started!");

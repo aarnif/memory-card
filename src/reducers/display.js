@@ -51,8 +51,8 @@ export const togglePlayMusicAction = () => {
   };
 };
 
-export const showCardAnimationAction = (playFlipSound) => {
-  console.log("Dispatching showCardAnimation action");
+export const setClickCardAnimationAction = (playFlipSound) => {
+  console.log("Dispatching setClickCardAnimationAction action");
   return (dispatch) => {
     dispatch(toggleFlipCard(false));
     playFlipSound();
@@ -60,6 +60,14 @@ export const showCardAnimationAction = (playFlipSound) => {
       dispatch(toggleFlipCard(true));
       playFlipSound();
     }, 1000);
+  };
+};
+
+export const setNewGameCardAnimationAction = (playFlipSound) => {
+  console.log("Dispatching setNewGameCardAnimationAction action");
+  return (dispatch) => {
+    dispatch(toggleFlipCard(true));
+    playFlipSound();
   };
 };
 

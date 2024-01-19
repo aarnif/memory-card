@@ -11,7 +11,7 @@ import {
 } from "../reducers/game";
 import {
   toggleShowOverlayAction,
-  showCardAnimationAction,
+  setClickCardAnimationAction,
 } from "../reducers/display";
 import cardFlip from "../assets/sounds/card_flip.wav";
 import { Card } from "./Card";
@@ -74,7 +74,7 @@ export function Cards() {
       const playCard = gameCards.map((card) =>
         card.id === cardId ? { ...card, isClicked: true } : card
       );
-      dispatch(showCardAnimationAction(playFlipSound));
+      dispatch(setClickCardAnimationAction(playFlipSound));
       setTimeout(
         // set cards in the middle of the animation
         () => dispatch(shuffleDeck(playCard)),
