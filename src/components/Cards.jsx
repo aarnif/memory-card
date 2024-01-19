@@ -13,10 +13,6 @@ import {
   toggleShowOverlayAction,
   showCardAnimationAction,
 } from "../reducers/display";
-import {
-  checkIfAllCardsHaveBeenClicked,
-  checkIfTopLevelAchieved,
-} from "../utils/game";
 import cardFlip from "../assets/sounds/card_flip.wav";
 import { Card } from "./Card";
 import "./Cards.css";
@@ -36,12 +32,20 @@ export function Cards() {
   const shownCards = gameCards.filter((card) => card.isShown);
 
   useEffect(() => {
+    const checkIfTopLevelAchieved = (topLevel, level) => topLevel === level;
     if (checkIfTopLevelAchieved(topLevel, level)) {
       gameOver();
     }
   }, [level]);
 
   useEffect(() => {
+    const checkIfAllCardsHaveBeenClicked = (clickedCards, shownCards) => {
+      return (
+        clickedCards.length > 0 &&
+        shownCards.length > 0 &&
+        clickedCards.length === shownCards.length
+      );
+    };
     if (checkIfAllCardsHaveBeenClicked(clickedCards, shownCards)) {
       console.log("Current game cards:");
       console.table(gameCards);
