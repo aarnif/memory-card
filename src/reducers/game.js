@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { characters } from "../utils/characterData";
+import { characters } from "../characterData";
 
 const cardsAddedPerLevel = 2;
 

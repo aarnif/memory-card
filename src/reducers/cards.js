@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { characters } from "../utils/characterData";
+import { characters } from "../characterData";
 
 const resetShownCards = (cards) => {
   return cards.map((card) => ({ ...card, isShown: false }));
