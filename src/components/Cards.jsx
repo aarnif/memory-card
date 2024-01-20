@@ -24,9 +24,11 @@ export function Cards() {
   const dispatch = useDispatch();
 
   const { level, cardsAddedPerLevel, topLevel } = gameState;
-  const { cardAnimationDuration } = displayState;
+  const { playSound, cardAnimationDuration } = displayState;
 
-  const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
+  const [playFlipSound] = useSound(cardFlip, {
+    volume: playSound ? 0.25 : 0,
+  });
 
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const shownCards = gameCards.filter((card) => card.isShown);

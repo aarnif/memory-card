@@ -4,19 +4,27 @@ import { Level } from "./Level";
 import batmanTheme from "../assets/sounds/batman_1989_theme.mp3";
 import ReactHowler from "react-howler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
-import { faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
+import { faVolumeHigh, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { togglePlayMusicAction } from "../reducers/display";
+import {
+  togglePlayMusicAction,
+  togglePlaySoundAction,
+} from "../reducers/display";
+import MuteSign from "./MuteSign";
 
 export function Header() {
   const gameState = useSelector((state) => state.game);
   const displayState = useSelector((state) => state.display);
 
   const { level, highScore } = gameState;
-  const { playMusic } = displayState;
+  const { playMusic, playSound } = displayState;
 
   const dispatch = useDispatch();
+
+  const togglePlaySound = () => {
+    console.log("Sound toggled!");
+    dispatch(togglePlaySoundAction());
+  };
 
   const togglePlayMusic = () => {
     console.log("Music toggled!");
@@ -43,11 +51,24 @@ export function Header() {
       <ul className="header--score">
         <li>Level: {level}</li>
         <li>High Score: {highScore}</li>
-        <li className="header--volume-icon" onClick={togglePlayMusic}>
-          {playMusic ? (
+        <li className="header--sound-icon" onClick={togglePlaySound}>
+          {playSound ? (
             <FontAwesomeIcon icon={faVolumeHigh} style={volumeIconStyle} />
           ) : (
-            <FontAwesomeIcon icon={faVolumeXmark} style={volumeIconStyle} />
+            <>
+              <FontAwesomeIcon icon={faVolumeHigh} style={volumeIconStyle} />
+              <MuteSign />
+            </>
+          )}
+        </li>
+        <li className="header--sound-icon" onClick={togglePlayMusic}>
+          {playMusic ? (
+            <FontAwesomeIcon icon={faMusic} style={volumeIconStyle} />
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faMusic} style={volumeIconStyle} />
+              <MuteSign />
+            </>
           )}
         </li>
         <li className="header--music-howler">

@@ -12,11 +12,15 @@ import cardFlip from "../assets/sounds/card_flip.wav";
 const NewGameModal = () => {
   const gameCards = useSelector((state) => state.cards);
   const gameState = useSelector((state) => state.game);
-
+  const displayState = useSelector((state) => state.display);
   const dispatch = useDispatch();
-  const [playFlipSound] = useSound(cardFlip, { volume: 0.25 });
 
   const { level, cardsAddedPerLevel } = gameState;
+  const { playSound } = displayState;
+
+  const [playFlipSound] = useSound(cardFlip, {
+    volume: playSound ? 0.25 : 0,
+  });
 
   const clickNewGame = () => {
     dispatch(toggleGameStart());

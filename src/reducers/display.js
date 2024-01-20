@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   flipCard: false,
   showOverlay: true,
-  playMusic: false,
+  playMusic: true,
+  playSound: true,
   cardAnimationDuration: 1000,
 };
 
@@ -20,6 +21,9 @@ const displaySlice = createSlice({
     togglePlayMusic(state, action) {
       state.playMusic = !state.playMusic;
     },
+    togglePlaySound(state, action) {
+      state.playSound = !state.playSound;
+    },
   },
 });
 
@@ -27,6 +31,7 @@ export const {
   toggleFlipCard,
   toggleShowOverlay,
   togglePlayMusic,
+  togglePlaySound,
   showCardAnimation,
 } = displaySlice.actions;
 
@@ -48,6 +53,13 @@ export const togglePlayMusicAction = () => {
   console.log("Dispatching togglePlayMusic action");
   return (dispatch) => {
     dispatch(togglePlayMusic());
+  };
+};
+
+export const togglePlaySoundAction = () => {
+  console.log("Dispatching togglePlaySound action");
+  return (dispatch) => {
+    dispatch(togglePlaySound());
   };
 };
 
