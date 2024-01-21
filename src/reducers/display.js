@@ -79,7 +79,6 @@ export const setNewGameCardAnimationAction = (playFlipSound) => {
   console.log("Dispatching setNewGameCardAnimationAction action");
   return (dispatch) => {
     dispatch(toggleFlipCard(true));
-    playFlipSound();
   };
 };
 

@@ -8,6 +8,7 @@ import {
 } from "../reducers/display";
 import useSound from "use-sound";
 import cardFlip from "../assets/sounds/card_flip.wav";
+import clickButton from "../assets/sounds/new_game_click.mp3";
 
 const NewGameModal = () => {
   const gameCards = useSelector((state) => state.cards);
@@ -22,12 +23,21 @@ const NewGameModal = () => {
     volume: playSound ? 0.25 : 0,
   });
 
+  const [playClickSound] = useSound(clickButton, {
+    volume: 0.25,
+  });
+
   const clickNewGame = () => {
-    dispatch(toggleGameStart());
-    dispatch(toggleShowOverlayAction());
-    dispatch(setNewGameCardAnimationAction(playFlipSound));
-    dispatch(resetDeck(gameCards, cardsAddedPerLevel));
-    dispatch(resetLevel());
+    playClickSound();
+
+    setTimeout(() => {
+      dispatch(toggleGameStart());
+      dispatch(toggleShowOverlayAction());
+      dispatch(setNewGameCardAnimationAction(playFlipSound));
+      dispatch(resetDeck(gameCards, cardsAddedPerLevel));
+      dispatch(resetLevel());
+    }, 100);
+
     console.log("New game started!");
     console.log(`First level ${level}!`);
   };

@@ -12,7 +12,7 @@ import {
   togglePlaySoundAction,
 } from "../reducers/display";
 import MuteSign from "./MuteSign";
-import clickButton from "../assets/sounds/button_click.mp3";
+import muteButton from "../assets/sounds/mute_button.mp3";
 
 export function Header() {
   const gameState = useSelector((state) => state.game);
@@ -22,19 +22,19 @@ export function Header() {
   const { level, highScore } = gameState;
   const { playMusic, playSound } = displayState;
 
-  const [playClickSound] = useSound(clickButton, {
-    volume: 0.25,
+  const [playMuteSound] = useSound(muteButton, {
+    volume: 0.4,
   });
 
   const togglePlaySound = () => {
     console.log("Sound toggled!");
-    playClickSound();
+    playMuteSound();
     dispatch(togglePlaySoundAction());
   };
 
   const togglePlayMusic = () => {
     console.log("Music toggled!");
-    playClickSound();
+    playMuteSound();
     dispatch(togglePlayMusicAction());
   };
 
