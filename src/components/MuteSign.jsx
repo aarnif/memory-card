@@ -3,11 +3,13 @@ import React from "react";
 const MuteSign = () => {
   return (
     <svg
-      width="49px"
-      height="49px"
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
-      style={{ position: "absolute" }}
+      style={{
+        position: "absolute",
+        minWidth: 30,
+        maxWidth: 50,
+      }}
     >
       <line
         x1="0"

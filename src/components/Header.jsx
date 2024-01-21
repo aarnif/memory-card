@@ -55,25 +55,41 @@ export function Header() {
           <h1 className="header--title">Memory Game</h1>
         </li>
       </ul>
-      <ul className="header--score">
+      <ul className="header--items">
         <li>Level: {level}</li>
         <li>High Score: {highScore}</li>
         <li className="header--sound-icon" onClick={togglePlaySound}>
           {playSound ? (
-            <FontAwesomeIcon icon={faVolumeHigh} style={volumeIconStyle} />
+            <FontAwesomeIcon
+              icon={faVolumeHigh}
+              style={volumeIconStyle}
+              className="sound-icon"
+            />
           ) : (
             <>
-              <FontAwesomeIcon icon={faVolumeHigh} style={volumeIconStyle} />
+              <FontAwesomeIcon
+                icon={faVolumeHigh}
+                style={volumeIconStyle}
+                className="sound-icon"
+              />
               <MuteSign />
             </>
           )}
         </li>
         <li className="header--sound-icon" onClick={togglePlayMusic}>
           {playMusic ? (
-            <FontAwesomeIcon icon={faMusic} style={volumeIconStyle} />
+            <FontAwesomeIcon
+              icon={faMusic}
+              style={volumeIconStyle}
+              className="sound-icon"
+            />
           ) : (
             <>
-              <FontAwesomeIcon icon={faMusic} style={volumeIconStyle} />
+              <FontAwesomeIcon
+                icon={faMusic}
+                style={volumeIconStyle}
+                className="sound-icon"
+              />
               <MuteSign />
             </>
           )}

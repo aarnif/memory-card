@@ -11,7 +11,7 @@
 }
 
 .header--logo-and-title,
-.header--score,
+.header--items,
 .header--volume-icon-and-howler {
   all: unset;
   list-style: none;
@@ -20,14 +20,8 @@
   align-items: center;
 }
 
-.header--logo-and-title,
-.header--score {
-  width: 380px;
-}
-
-.header--score {
-  width: 600px;
-  justify-content: space-around;
+.header--items > li {
+  padding: 20px;
 }
 
 .header--volume-icon-and-howler {
@@ -42,15 +36,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .header--title {
   all: unset;
-  font-size: 56px;
+  font-size: calc(16px + 3.5vmin);
 }
 
 .header--logo {
-  width: 60px;
+  min-width: 40px;
+  max-width: 80px;
 }
 
 .header--title {
@@ -59,10 +55,6 @@
 }
 
 .header--sound-icon {
-  border: 3px solid #0077f2;
-  border-radius: 50%;
-  padding: 15px;
-  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,4 +63,10 @@
 .header--sound-icon:hover {
   border-color: skyblue;
   cursor: pointer;
+}
+
+.sound-icon {
+  border: 3px solid #0077f2;
+  border-radius: 50%;
+  padding: 15px;
 }
