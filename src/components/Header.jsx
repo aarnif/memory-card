@@ -6,28 +6,35 @@ import ReactHowler from "react-howler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeHigh, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
+import useSound from "use-sound";
 import {
   togglePlayMusicAction,
   togglePlaySoundAction,
 } from "../reducers/display";
 import MuteSign from "./MuteSign";
+import clickButton from "../assets/sounds/button_click.mp3";
 
 export function Header() {
   const gameState = useSelector((state) => state.game);
   const displayState = useSelector((state) => state.display);
+  const dispatch = useDispatch();
 
   const { level, highScore } = gameState;
   const { playMusic, playSound } = displayState;
 
-  const dispatch = useDispatch();
+  const [playClickSound] = useSound(clickButton, {
+    volume: 0.25,
+  });
 
   const togglePlaySound = () => {
     console.log("Sound toggled!");
+    playClickSound();
     dispatch(togglePlaySoundAction());
   };
 
   const togglePlayMusic = () => {
     console.log("Music toggled!");
+    playClickSound();
     dispatch(togglePlayMusicAction());
   };
 
