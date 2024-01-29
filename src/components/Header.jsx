@@ -4,14 +4,17 @@ import { Level } from "./Level";
 import batmanTheme from "../assets/sounds/batman_1989_theme.mp3";
 import ReactHowler from "react-howler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeHigh, faMusic } from "@fortawesome/free-solid-svg-icons";
+import {
+  faVolumeHigh,
+  faMusic,
+  faBan,
+} from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
 import {
   togglePlayMusicAction,
   togglePlaySoundAction,
 } from "../reducers/display";
-import MuteSign from "./MuteSign";
 import muteButton from "../assets/sounds/mute_button.mp3";
 
 export function Header() {
@@ -38,13 +41,6 @@ export function Header() {
     dispatch(togglePlayMusicAction());
   };
 
-  const volumeIconStyle = {
-    color: "#0077f2",
-    "&:hover": {
-      color: "#ff0000",
-    },
-  };
-
   return (
     <header className="header">
       <ul className="header--logo-and-title">
@@ -60,38 +56,26 @@ export function Header() {
         <li>High Score: {highScore}</li>
         <li className="header--sound-icon" onClick={togglePlaySound}>
           {playSound ? (
-            <FontAwesomeIcon
-              icon={faVolumeHigh}
-              style={volumeIconStyle}
-              className="sound-icon"
-            />
+            <div className="sound-icon">
+              <FontAwesomeIcon icon={faVolumeHigh} className="volume" />
+            </div>
           ) : (
-            <>
-              <FontAwesomeIcon
-                icon={faVolumeHigh}
-                style={volumeIconStyle}
-                className="sound-icon"
-              />
-              <MuteSign />
-            </>
+            <div className="sound-icon">
+              <FontAwesomeIcon icon={faVolumeHigh} className="volume" />
+              <FontAwesomeIcon icon={faBan} size={"2xl"} className="ban" />
+            </div>
           )}
         </li>
         <li className="header--sound-icon" onClick={togglePlayMusic}>
           {playMusic ? (
-            <FontAwesomeIcon
-              icon={faMusic}
-              style={volumeIconStyle}
-              className="sound-icon"
-            />
+            <div className="sound-icon">
+              <FontAwesomeIcon icon={faMusic} className="volume" />
+            </div>
           ) : (
-            <>
-              <FontAwesomeIcon
-                icon={faMusic}
-                style={volumeIconStyle}
-                className="sound-icon"
-              />
-              <MuteSign />
-            </>
+            <div className="sound-icon">
+              <FontAwesomeIcon icon={faMusic} className="volume" />
+              <FontAwesomeIcon icon={faBan} size={"2xl"} className="ban" />
+            </div>
           )}
         </li>
         <li className="header--music-howler">
