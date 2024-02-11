@@ -1,19 +1,37 @@
 import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { motion } from "framer-motion";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
   return (
     <footer className="footer">
-      <h3>
-        Copyright © {currentYear} aarnif{" "}
-        <FontAwesomeIcon
-          icon={faGithub}
-          style={{ color: "#0077f2" }}
-          size={"lg"}
-        />
-      </h3>
+      <ul className="footer-items">
+        <li>
+          <h3>Created By aarnif</h3>
+        </li>
+        <li>
+          <motion.div
+            whileHover={{
+              scale: 1.5,
+              rotate: 360,
+            }}
+            transition={{ duration: 0.5 }}
+          >
+            <a
+              href="https://github.com/aarnif"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon
+                icon={faGithub}
+                style={{ color: "#0077f2" }}
+                size={"xl"}
+              />
+            </a>
+          </motion.div>
+        </li>
+      </ul>
     </footer>
   );
 }
