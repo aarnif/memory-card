@@ -43,7 +43,7 @@ export function Header() {
 
   const styles = {
     header:
-      "bg-black-rgba flex justify-around items-center shadow-blue-under text-3xl 2xl:text-4xl p-2",
+      "bg-header flex justify-around items-center shadow-blue text-3xl 2xl:text-4xl p-2",
     ul: "flex justify-around items-center",
     li: "px-4",
     h1: "text-5xl 2xl:text-6xl",

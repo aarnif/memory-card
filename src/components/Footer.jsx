@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export function Footer() {
   const styles = {
     footer:
-      "bg-black-rgba flex flex-col justify-around items-center shadow-blue-under p-2",
+      "bg-header flex flex-col justify-around items-center shadow-blue p-2",
     ul: "flex justify-center items-center",
     li: "px-1",
     h3: "text-xl",

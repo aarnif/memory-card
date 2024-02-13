@@ -15,7 +15,6 @@ import {
 } from "../reducers/display";
 import cardFlip from "../assets/sounds/card_flip.wav";
 import { Card } from "./Card";
-import "./Cards.css";
 
 export function Cards() {
   const gameCards = useSelector((state) => state.cards);
@@ -87,9 +86,15 @@ export function Cards() {
     }
   };
 
+  const styles = {
+    wrapper: "flex flex-col grow justify-center items-center p-10",
+    cardGrid:
+      "w-full h-full grid justify-items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl",
+  };
+
   return (
-    <main className="wrapper">
-      <div className="card-grid">
+    <main className={styles.wrapper}>
+      <div className={styles.cardGrid}>
         {shownCards.map((card) => (
           <Card
             key={card.id}

@@ -7,13 +7,24 @@ export default {
         gotham: "url('assets/other-images/gotham-city-background.png')",
       },
       colors: {
-        "black-rgba": "rgba(0, 0, 0, 0.5)",
+        header: "rgba(0, 0, 0, 0.5)",
+        card: "rgba(0, 0, 0, 0.7)",
       },
       boxShadow: {
-        "blue-under": "0px 0px 2px 2px rgba(0, 119, 242, 0.7)",
+        blue: "0px 0px 2px 2px rgba(0, 119, 242, 0.7)",
+        skyBlue: "0px 0px 2px 2px skyblue",
       },
       borderColor: {
         "dc-blue": "#0077f2",
+      },
+      gridTemplateColumns: {
+        "cards-sm": "repeat(auto-fit, minmax(160px, 1fr))",
+        "cards-lg": "repeat(auto-fit, minmax(200px, 1fr))",
+        "cards-xl": "repeat(auto-fit, minmax(240px, 1fr))",
+      },
+      screens: {
+        "2xl": "1900px",
+        "3xl": "2150px",
       },
     },
   },
