@@ -1,4 +1,4 @@
-import "./Header.css";
+// import "./Header.css";
 import DcComics from "../assets/other-images/dc_comics_logo.svg";
 import { Level } from "./Level";
 import batmanTheme from "../assets/sounds/batman_1989_theme.mp3";
@@ -41,44 +41,71 @@ export function Header() {
     dispatch(togglePlayMusicAction());
   };
 
+  const styles = {
+    header:
+      "bg-black-rgba flex justify-around items-center shadow-blue-under text-3xl 2xl:text-4xl p-2",
+    ul: "flex justify-around items-center",
+    li: "px-4",
+    h1: "text-5xl 2xl:text-6xl",
+    border:
+      "border-4 border-dc-blue rounded-[50%] m-2 cursor-pointer hover:border-sky-300",
+    iconContainer: "flex justify-around items-center relative p-6 2xl:p-8",
+    iconPosition: "absolute",
+    iconSize: "2xl",
+  };
+
   return (
-    <header className="header">
-      <ul className="header--logo-and-title">
-        <li>
-          <img className="header--logo" src={DcComics} alt="DC Comics Logo" />
+    <header className={styles.header}>
+      <ul className={styles.ul}>
+        <li className={styles.li}>
+          <img className="w-24" src={DcComics} alt="DC Comics Logo" />
         </li>
-        <li>
-          <h1 className="header--title">Memory Game</h1>
+        <li className={styles.li}>
+          <h1 className="text-5xl 2xl:text-6xl">Memory Game</h1>
         </li>
       </ul>
-      <ul className="header--items">
-        <li>Level: {level}</li>
-        <li>High Score: {highScore}</li>
-        <li className="header--sound-icon" onClick={togglePlaySound}>
+      <ul className={styles.ul}>
+        <li className={styles.li}>Level: {level}</li>
+        <li className={styles.li}>High Score: {highScore}</li>
+        <li className={styles.border} onClick={togglePlaySound}>
           {playSound ? (
-            <div className="sound-icon">
-              <FontAwesomeIcon icon={faVolumeHigh} className="volume" />
+            <div className={styles.iconContainer}>
+              <FontAwesomeIcon
+                icon={faVolumeHigh}
+                className={styles.iconPosition}
+              />
             </div>
           ) : (
-            <div className="sound-icon">
-              <FontAwesomeIcon icon={faVolumeHigh} className="volume" />
-              <FontAwesomeIcon icon={faBan} size={"2xl"} className="ban" />
+            <div className={styles.iconContainer}>
+              <FontAwesomeIcon
+                icon={faVolumeHigh}
+                className={styles.iconPosition}
+              />
+              <FontAwesomeIcon
+                icon={faBan}
+                size={styles.iconSize}
+                className={styles.iconPosition}
+              />
             </div>
           )}
         </li>
-        <li className="header--sound-icon" onClick={togglePlayMusic}>
+        <li className={styles.border} onClick={togglePlayMusic}>
           {playMusic ? (
-            <div className="sound-icon">
-              <FontAwesomeIcon icon={faMusic} className="volume" />
+            <div className={styles.iconContainer}>
+              <FontAwesomeIcon icon={faMusic} className={styles.iconPosition} />
             </div>
           ) : (
-            <div className="sound-icon">
-              <FontAwesomeIcon icon={faMusic} className="volume" />
-              <FontAwesomeIcon icon={faBan} size={"2xl"} className="ban" />
+            <div className={styles.iconContainer}>
+              <FontAwesomeIcon icon={faMusic} className={styles.iconPosition} />
+              <FontAwesomeIcon
+                icon={faBan}
+                size={styles.iconSize}
+                className={styles.iconPosition}
+              />
             </div>
           )}
         </li>
-        <li className="header--music-howler">
+        <li className="w-0">
           {playMusic && (
             <ReactHowler src={batmanTheme} playing={true} volume={0.2} loop />
           )}
