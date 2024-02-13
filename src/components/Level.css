@@ -1,7 +1,0 @@
-.level {
-  position: absolute;
-  top: 40%;
-  font-size: calc(10px + 3vmin);
-  font-family: "badaboom", "Comic Neue", cursive;
-  z-index: 1;
-}

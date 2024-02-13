@@ -25,7 +25,7 @@ export function Card({ image, name, playCard }) {
   const styles = {
     cardWidth: 250,
     cardHeight: 425,
-    card: `w-[160px] h-[240px] 2xl:w-[200px] 2xl:h-[300px] 3xl:w-[240px] 3xl:h-[360px] flex flex-col justify-center items-center cursor-pointer bg-card rounded-xl shadow-blue hover:shadow-skyBlue`,
+    card: "w-[160px] h-[240px] 2xl:w-[200px] 2xl:h-[300px] 3xl:w-[240px] 3xl:h-[360px] flex flex-col justify-center items-center cursor-pointer bg-card rounded-xl shadow-blue hover:shadow-skyBlue hover:text-sky-300",
     imageContainer: "pt-4 px-4",
     cardImage: "w-full rounded-xl",
     characterName:

@@ -1,4 +1,3 @@
-import "./GameModal.css";
 import { useSelector, useDispatch } from "react-redux";
 import { resetLevel, toggleGameOver } from "../reducers/game";
 import { resetDeck } from "../reducers/cards";
@@ -9,6 +8,7 @@ import {
 import useSound from "use-sound";
 import cardFlip from "../assets/sounds/card_flip.wav";
 import clickButton from "../assets/sounds/new_game_click.mp3";
+import { motion } from "framer-motion";
 
 const GameModal = () => {
   const gameCards = useSelector((state) => state.cards);
@@ -41,36 +41,39 @@ const GameModal = () => {
     console.log("Restart game!");
     console.log(`First level ${level}!`);
   };
-  return (
-    <section className="game-modal-end">
-      <div className="game-modal--content">
-        <h1 className="game-modal--header">Game Over!</h1>
 
-        {gameEndResult === topLevel ? (
-          <>
-            <p className="game-modal--text">
-              {"Congratulations!"}
-              <br></br>
-              {`You reached the end of the game!`}
-            </p>
-          </>
-        ) : (
-          <>
-            <p className="game-modal--text">
-              {`You reached level ${gameEndResult}!`}
-              <br></br>
-              {"Ready to try again?"}
-            </p>
-          </>
-        )}
-        <button
-          className="game-modal--new-game-button"
-          onClick={clickRestartGame}
-        >
-          New Game
-        </button>
-      </div>
-    </section>
+  const styles = {
+    container:
+      "relative top-[-100px] z-10 bg-zinc-800 rounded-xl shadow-blue flex flex-col justify-center items-center pt-10 px-20",
+    header: "text-4xl pb-4",
+    text: "text-2xl text-center py-1",
+    button:
+      "shadow-blue hover:shadow-skyBlue hover:bg-zinc-900 rounded-xl text-3xl text-center py-3 px-9 m-4 hover:text-sky-300",
+  };
+
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.header}>Game Over!</h1>
+
+      {gameEndResult === topLevel ? (
+        <>
+          <p className={styles.text}>Congratulations!</p>
+          <p className={styles.text}>You reached the end of the game! </p>
+        </>
+      ) : (
+        <>
+          <p className={styles.text}>{`You reached level ${gameEndResult}!`}</p>
+          <p className={styles.text}>Ready to try again?</p>
+        </>
+      )}
+      <motion.button
+        className={styles.button}
+        onClick={clickRestartGame}
+        whileTap={{ scale: 0.9 }}
+      >
+        New Game
+      </motion.button>
+    </div>
   );
 };
 

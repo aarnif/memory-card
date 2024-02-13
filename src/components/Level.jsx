@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import "./Level.css";
 
 export function Level({ level }) {
   const animate = {
@@ -14,10 +13,14 @@ export function Level({ level }) {
     duration: 2.0,
   };
 
+  const styles = {
+    container: "absolute top-[40%] z-1 text-4xl",
+  };
+
   return (
     <motion.div
       key={level}
-      className="level"
+      className={styles.container}
       animate={animate}
       transition={transition}
     >
