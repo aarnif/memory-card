@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { iniatilizeCards } from "./reducers/cards";
-import "./App.css";
 import NewGameModal from "./components/NewGameModal";
 import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
@@ -23,11 +22,11 @@ function App() {
     <>
       <Header />
       {!isGameStart ? (
-        <main className="main-content-modal">
+        <main className="flex grow justify-center items-center">
           <NewGameModal />
         </main>
       ) : isGameOver ? (
-        <main className="main-content-modal">
+        <main className="flex grow justify-center items-center">
           <RestartGameModal />
         </main>
       ) : (

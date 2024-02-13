@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 export function Overlay() {
@@ -10,24 +10,25 @@ export function Overlay() {
     opacity: 0,
     pointerEvents: "none",
   };
+
   const end = {
     opacity: 1,
     pointerEvents: "all",
   };
+
   const animationDuration = 0.7;
-  return showOverlay ? (
-    <motion.div
-      id="overlay"
-      initial={start}
-      animate={end}
-      transition={{ duration: animationDuration }}
-    />
-  ) : (
-    <motion.div
-      id="overlay"
-      initial={end}
-      animate={start}
-      transition={{ duration: animationDuration }}
-    />
+
+  return (
+    <AnimatePresence mode={"wait"}>
+      {showOverlay && (
+        <motion.div
+          className="inset-0 fixed bg-black bg-opacity-1 pointer-events-none"
+          initial={start}
+          animate={end}
+          exit={start}
+          transition={{ duration: animationDuration }}
+        />
+      )}
+    </AnimatePresence>
   );
 }
