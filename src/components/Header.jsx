@@ -43,14 +43,15 @@ export function Header() {
 
   const styles = {
     header:
-      "bg-header flex justify-around items-center shadow-blue text-3xl 2xl:text-4xl p-2",
+      "bg-header flex justify-around items-center shadow-blue text-2xl lg:text-3xl xl:text-4xl p-2",
     ul: "flex justify-around items-center",
     li: "px-4",
-    h1: "text-5xl 2xl:text-6xl",
+    h1: "text-4xl xl:text-5xl 2xl:text-6xl",
     border:
       "border-4 border-dc-blue rounded-[50%] m-2 cursor-pointer hover:border-sky-300",
-    iconContainer: "flex justify-around items-center relative p-6 2xl:p-8",
+    iconContainer: "flex justify-around items-center relative p-6 xl:p-8",
     iconPosition: "absolute",
+    logoSize: "w-16 xl:w-20 2xl:w-24",
     iconSize: "2xl",
   };
 
@@ -58,10 +59,14 @@ export function Header() {
     <header className={styles.header}>
       <ul className={styles.ul}>
         <li className={styles.li}>
-          <img className="w-24" src={DcComics} alt="DC Comics Logo" />
+          <img
+            className={styles.logoSize}
+            src={DcComics}
+            alt="DC Comics Logo"
+          />
         </li>
         <li className={styles.li}>
-          <h1 className="text-5xl 2xl:text-6xl">Memory Game</h1>
+          <h1 className={styles.h1}>Memory Game</h1>
         </li>
       </ul>
       <ul className={styles.ul}>
