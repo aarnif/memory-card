@@ -1,37 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: "badaboom";
   src: url("assets/fonts/badaboom_bb/BADABB__.TTF");
 }
 
-:root {
-  font-family: "badaboom", "Comic Neue", cursive;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: 1px;
-
-  color-scheme: light dark;
-  color: #0077f2;
-  background-color: #282c34;
-  background: url("assets/other-images/gotham-city-background.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  box-sizing: border-box;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+@layer base {
+  body {
+    @apply m-0 box-border bg-cover bg-no-repeat bg-gotham font-['badaboom'] text-[#0077f2] tracking-widest font-normal;
+  }
+  #root {
+    @apply flex flex-col min-h-screen;
+  }
 }
