@@ -1,5 +1,4 @@
-// import "./Header.css";
-import DcComics from "../assets/other-images/dc_comics_logo.svg";
+import batmanLogo from "../assets/other-images/batman-logo.png";
 import { Level } from "./Level";
 import batmanTheme from "../assets/sounds/batman_1989_theme.mp3";
 import ReactHowler from "react-howler";
@@ -51,7 +50,7 @@ export function Header() {
       "border-4 border-dc-blue rounded-[50%] m-2 cursor-pointer hover:border-sky-300",
     iconContainer: "flex justify-around items-center relative p-6 xl:p-8",
     iconPosition: "absolute",
-    logoSize: "w-16 xl:w-20 2xl:w-24",
+    logoSize: "w-20 xl:w-24 2xl:w-28",
     iconSize: "2xl",
   };
 
@@ -59,11 +58,7 @@ export function Header() {
     <header className={styles.header}>
       <ul className={styles.ul}>
         <li className={styles.li}>
-          <img
-            className={styles.logoSize}
-            src={DcComics}
-            alt="DC Comics Logo"
-          />
+          <img className={styles.logoSize} src={batmanLogo} alt="Batman Logo" />
         </li>
         <li className={styles.li}>
           <h1 className={styles.h1}>Memory Game</h1>

@@ -15,7 +15,7 @@ export default {
         skyBlue: "0px 0px 2px 2px skyblue",
       },
       borderColor: {
-        "dc-blue": "#0077f2",
+        "dc-blue": "rgba(0, 119, 242, 0.9)",
       },
       gridTemplateColumns: {
         "cards-sm": "repeat(auto-fit, minmax(160px, 1fr))",
@@ -25,6 +25,9 @@ export default {
       screens: {
         "2xl": "1900px",
         "3xl": "2150px",
+      },
+      textColor: {
+        "dc-blue": "rgba(0, 119, 242, 0.9)",
       },
     },
   },
