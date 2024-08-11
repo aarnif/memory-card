@@ -2,12 +2,8 @@ import batmanLogo from "../assets/other-images/batman-logo.png";
 import { Level } from "./Level";
 import batmanTheme from "../assets/sounds/batman_1989_theme.mp3";
 import ReactHowler from "react-howler";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faVolumeHigh,
-  faMusic,
-  faBan,
-} from "@fortawesome/free-solid-svg-icons";
+import Icon from "@mdi/react";
+import { mdiVolumeHigh, mdiVolumeOff, mdiMusic, mdiMusicOff } from "@mdi/js";
 import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
 import {
@@ -23,8 +19,6 @@ export function Header() {
 
   const { level, highScore } = gameState;
   const { playMusic, playSound } = displayState;
-
-  console.log("Test comment!");
 
   const [playMuteSound] = useSound(muteButton, {
     volume: 0.4,
@@ -49,11 +43,10 @@ export function Header() {
     li: "px-4",
     h1: "text-4xl xl:text-5xl 2xl:text-6xl",
     border:
-      "border-4 border-dc-blue rounded-[50%] m-2 cursor-pointer hover:border-sky-300",
-    iconContainer: "flex justify-around items-center relative p-6 xl:p-8",
-    iconPosition: "absolute",
+      "group border-4 border-dc-blue rounded-full m-2 cursor-pointer hover:border-sky-300",
+    iconContainer: "flex justify-around items-center p-1 xl:p-2",
     logoSize: "w-20 xl:w-24 2xl:w-28",
-    iconSize: "2xl",
+    icon: "w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300",
   };
 
   return (
@@ -72,38 +65,22 @@ export function Header() {
         <li className={styles.border} onClick={togglePlaySound}>
           {playSound ? (
             <div className={styles.iconContainer}>
-              <FontAwesomeIcon
-                icon={faVolumeHigh}
-                className={styles.iconPosition}
-              />
+              <Icon path={mdiVolumeHigh} className={styles.icon} />
             </div>
           ) : (
             <div className={styles.iconContainer}>
-              <FontAwesomeIcon
-                icon={faVolumeHigh}
-                className={styles.iconPosition}
-              />
-              <FontAwesomeIcon
-                icon={faBan}
-                size={styles.iconSize}
-                className={styles.iconPosition}
-              />
+              <Icon path={mdiVolumeOff} className={styles.icon} />
             </div>
           )}
         </li>
         <li className={styles.border} onClick={togglePlayMusic}>
           {playMusic ? (
             <div className={styles.iconContainer}>
-              <FontAwesomeIcon icon={faMusic} className={styles.iconPosition} />
+              <Icon path={mdiMusic} className={styles.icon} />
             </div>
           ) : (
             <div className={styles.iconContainer}>
-              <FontAwesomeIcon icon={faMusic} className={styles.iconPosition} />
-              <FontAwesomeIcon
-                icon={faBan}
-                size={styles.iconSize}
-                className={styles.iconPosition}
-              />
+              <Icon path={mdiMusicOff} className={styles.icon} />
             </div>
           )}
         </li>
