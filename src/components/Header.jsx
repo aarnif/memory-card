@@ -24,6 +24,8 @@ export function Header() {
   const { level, highScore } = gameState;
   const { playMusic, playSound } = displayState;
 
+  console.log("Test comment!");
+
   const [playMuteSound] = useSound(muteButton, {
     volume: 0.4,
   });
