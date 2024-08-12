@@ -24,7 +24,7 @@ const GameModal = () => {
   });
 
   const [playClickSound] = useSound(clickButton, {
-    volume: 0.25,
+    volume: playSound ? 0.25 : 0,
   });
 
   const clickRestartGame = () => {
