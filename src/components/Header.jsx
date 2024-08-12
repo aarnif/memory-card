@@ -1,5 +1,4 @@
 import batmanLogo from "../assets/other-images/batman-logo.png";
-import { Level } from "./Level";
 import batmanTheme from "../assets/sounds/batman_1989_theme.mp3";
 import ReactHowler from "react-howler";
 import Icon from "@mdi/react";
@@ -90,7 +89,6 @@ export function Header() {
           )}
         </li>
       </ul>
-      <Level key={level} level={level} />
     </header>
   );
 }
