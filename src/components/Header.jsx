@@ -43,10 +43,10 @@ export function Header() {
     li: "px-4",
     h1: "text-4xl xl:text-5xl 2xl:text-6xl",
     border:
-      "group border-4 border-dc-blue rounded-full m-2 cursor-pointer hover:border-sky-300",
-    iconContainer: "flex justify-around items-center p-1 xl:p-2",
+      "group border-4 border-dc-blue rounded-full m-2 cursor-pointer hover:border-sky-300 active:scale-95 transition",
+    iconContainer: "flex justify-around items-center p-1 xl:p-2 transition",
     logoSize: "w-20 xl:w-24 2xl:w-28",
-    icon: "w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300",
+    icon: "w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300 transition",
   };
 
   return (

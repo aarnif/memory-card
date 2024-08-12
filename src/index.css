@@ -14,4 +14,7 @@
   #root {
     @apply flex flex-col min-h-screen;
   }
+  .transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
 }
