@@ -3,11 +3,12 @@ import { toggleGameStart, resetLevel } from "../reducers/game";
 import { resetDeck } from "../reducers/cards";
 import {
   toggleShowOverlayAction,
+  toggleShowLevelAction,
   setNewGameCardAnimationAction,
 } from "../reducers/display";
 import useSound from "use-sound";
-import cardFlip from "../assets/sounds/card_flip.wav";
 import clickButton from "../assets/sounds/new_game_click.mp3";
+import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 import { motion } from "framer-motion";
 
 const NewGameModal = () => {
@@ -19,12 +20,12 @@ const NewGameModal = () => {
   const { level, cardsAddedPerLevel } = gameState;
   const { playSound } = displayState;
 
-  const [playFlipSound] = useSound(cardFlip, {
+  const [playClickSound] = useSound(clickButton, {
     volume: playSound ? 0.25 : 0,
   });
 
-  const [playClickSound] = useSound(clickButton, {
-    volume: 0.25,
+  const [nextLevelSound] = useSound(levelNext, {
+    volume: playSound ? 0.25 : 0,
   });
 
   const clickNewGame = () => {
@@ -33,7 +34,8 @@ const NewGameModal = () => {
     setTimeout(() => {
       dispatch(toggleGameStart());
       dispatch(toggleShowOverlayAction());
-      dispatch(setNewGameCardAnimationAction(playFlipSound));
+      dispatch(toggleShowLevelAction(nextLevelSound));
+      dispatch(setNewGameCardAnimationAction());
       dispatch(resetDeck(gameCards, cardsAddedPerLevel));
       dispatch(resetLevel());
     }, 100);

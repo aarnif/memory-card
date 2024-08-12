@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   flipCard: false,
   showOverlay: true,
+  showLevel: false,
   playMusic: true,
   playSound: true,
   cardAnimationDuration: 1000,
@@ -18,6 +19,9 @@ const displaySlice = createSlice({
     toggleShowOverlay(state, action) {
       state.showOverlay = !state.showOverlay;
     },
+    toggleShowLevel(state, action) {
+      state.showLevel = !state.showLevel;
+    },
     togglePlayMusic(state, action) {
       state.playMusic = !state.playMusic;
     },
@@ -30,6 +34,7 @@ const displaySlice = createSlice({
 export const {
   toggleFlipCard,
   toggleShowOverlay,
+  toggleShowLevel,
   togglePlayMusic,
   togglePlaySound,
   showCardAnimation,
@@ -46,6 +51,17 @@ export const toggleShowOverlayAction = () => {
   console.log("Dispatching toggleShowOverlay action");
   return (dispatch) => {
     dispatch(toggleShowOverlay());
+  };
+};
+
+export const toggleShowLevelAction = (nextLevelSound) => {
+  console.log("Dispatching toggleShowLevel action");
+  return (dispatch) => {
+    dispatch(toggleShowLevel(true));
+    nextLevelSound();
+    setTimeout(() => {
+      dispatch(toggleShowLevel(false));
+    }, 2000);
   };
 };
 
@@ -75,7 +91,7 @@ export const setClickCardAnimationAction = (playFlipSound) => {
   };
 };
 
-export const setNewGameCardAnimationAction = (playFlipSound) => {
+export const setNewGameCardAnimationAction = () => {
   console.log("Dispatching setNewGameCardAnimationAction action");
   return (dispatch) => {
     dispatch(toggleFlipCard(true));
