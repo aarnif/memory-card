@@ -6,19 +6,21 @@ export function Level() {
   const displayState = useSelector((state) => state.display);
 
   const { level } = gameState;
-  const { showLevel } = displayState;
+  const { showLevel, levelAnimationDuration } = displayState;
 
   const animate = {
-    opacity: [0, 1, 0],
+    opacity: [0, 1, 1, 1, 0],
     fontSize: [
       "calc(10px + 3vmin)",
+      "calc(10px + 6vmin)",
+      "calc(10px + 6vmin)",
       "calc(10px + 6vmin)",
       "calc(10px + 6vmin)",
     ],
   };
 
   const transition = {
-    duration: 2.0,
+    duration: levelAnimationDuration / 1000,
   };
 
   const styles = {

@@ -7,6 +7,7 @@ const initialState = {
   playMusic: true,
   playSound: true,
   cardAnimationDuration: 1000,
+  levelAnimationDuration: 2000,
 };
 
 const displaySlice = createSlice({
@@ -61,7 +62,7 @@ export const toggleShowLevelAction = (nextLevelSound) => {
     nextLevelSound();
     setTimeout(() => {
       dispatch(toggleShowLevel(false));
-    }, 2000);
+    }, initialState.levelAnimationDuration);
   };
 };
 
@@ -87,7 +88,7 @@ export const setClickCardAnimationAction = (playFlipSound) => {
     setTimeout(() => {
       dispatch(toggleFlipCard(true));
       playFlipSound();
-    }, 1000);
+    }, initialState.cardAnimationDuration);
   };
 };
 
