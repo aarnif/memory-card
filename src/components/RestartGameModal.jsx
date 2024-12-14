@@ -44,38 +44,39 @@ const GameModal = () => {
     console.log(`First level ${level}!`);
   };
 
-  const styles = {
-    container:
-      "relative top-[-100px] z-10 bg-zinc-800 rounded-xl shadow-blue flex flex-col justify-center items-center pt-10 px-20",
-    header: "text-4xl pb-4",
-    text: "text-2xl text-center py-1",
-    button:
-      "shadow-blue hover:shadow-skyBlue hover:bg-zinc-900 rounded-xl text-3xl text-center py-3 px-9 m-4 hover:text-sky-300",
-  };
-
   return (
-    <div className={styles.container}>
-      <h1 className={styles.header}>Game Over!</h1>
+    <motion.div
+      key="overlay"
+      className="inset-0 fixed flex justify-center items-center bg-black bg-opacity-70"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="relative top-[-100px] z-10 bg-zinc-800 rounded-xl shadow-blue flex flex-col justify-center items-center pt-10 px-20">
+        <h1 className="text-4xl pb-4">Game Over!</h1>
 
-      {gameEndResult === topLevel ? (
-        <>
-          <p className={styles.text}>Congratulations!</p>
-          <p className={styles.text}>You reached the end of the game! </p>
-        </>
-      ) : (
-        <>
-          <p className={styles.text}>{`You reached level ${gameEndResult}!`}</p>
-          <p className={styles.text}>Ready to try again?</p>
-        </>
-      )}
-      <motion.button
-        className={styles.button}
-        onClick={clickRestartGame}
-        whileTap={{ scale: 0.9 }}
-      >
-        New Game
-      </motion.button>
-    </div>
+        {gameEndResult === topLevel ? (
+          <>
+            <p className="text-3xl text-center py-1">Congratulations!</p>
+            <p className="text-3xl text-center py-1">
+              You reached the end of the game!{" "}
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-3xl text-center py-1">{`You reached level ${gameEndResult}!`}</p>
+            <p className="text-3xl text-center py-1">Ready to try again?</p>
+          </>
+        )}
+        <motion.button
+          className="shadow-blue hover:shadow-skyBlue hover:bg-zinc-900 rounded-xl text-3xl text-center py-3 px-9 m-4 hover:text-sky-300"
+          onClick={clickRestartGame}
+          whileTap={{ scale: 0.9 }}
+        >
+          New Game
+        </motion.button>
+      </div>
+    </motion.div>
   );
 };
 
