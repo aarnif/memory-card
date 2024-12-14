@@ -6,7 +6,7 @@ import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
 import { Footer } from "./components/Footer";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const gameState = useSelector((state) => state.game);
@@ -25,7 +25,7 @@ function App() {
         key="game-window"
         className="flex-grow flex justify-center items-center"
       >
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {!isGameStart ? (
             <NewGameModal key="new-game" />
           ) : (

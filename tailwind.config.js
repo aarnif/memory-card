@@ -5,6 +5,7 @@ export default {
     extend: {
       backgroundImage: {
         gotham: "url('assets/other-images/gotham-city-background.png')",
+        "new-game": "url('assets/other-images/new_game_background.png')",
       },
       colors: {
         header: "rgba(0, 0, 0, 0.5)",
