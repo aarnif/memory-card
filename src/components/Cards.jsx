@@ -17,6 +17,7 @@ import {
 import cardFlip from "../assets/sounds/card_flip.wav";
 import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 import { Card } from "./Card";
+import { Level } from "./Level";
 
 export function Cards() {
   const gameCards = useSelector((state) => state.cards);
@@ -25,7 +26,7 @@ export function Cards() {
   const dispatch = useDispatch();
 
   const { level, cardsAddedPerLevel, topLevel } = gameState;
-  const { playSound, cardAnimationDuration } = displayState;
+  const { playSound, cardAnimationDuration, showLevel } = displayState;
 
   const [playFlipSound] = useSound(cardFlip, {
     volume: playSound ? 0.25 : 0,
@@ -93,15 +94,9 @@ export function Cards() {
     }
   };
 
-  const styles = {
-    wrapper: "flex flex-col grow justify-center items-center p-10",
-    cardGrid:
-      "w-full h-full grid justify-items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl",
-  };
-
   return (
-    <main className={styles.wrapper}>
-      <div className={styles.cardGrid}>
+    <main className="relative flex flex-col grow justify-center items-center p-10">
+      <div className="w-full h-full grid justify-items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl">
         {shownCards.map((card) => (
           <Card
             key={card.id}
@@ -112,6 +107,7 @@ export function Cards() {
           />
         ))}
       </div>
+      {showLevel && <Level />}
     </main>
   );
 }

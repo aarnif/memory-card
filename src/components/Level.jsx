@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 export function Level() {
@@ -6,7 +6,7 @@ export function Level() {
   const displayState = useSelector((state) => state.display);
 
   const { level } = gameState;
-  const { showLevel, levelAnimationDuration } = displayState;
+  const { levelAnimationDuration } = displayState;
 
   const animate = {
     opacity: [0, 1, 1, 1, 0],
@@ -23,29 +23,23 @@ export function Level() {
     duration: levelAnimationDuration / 1000,
   };
 
-  const styles = {
-    background: "inset-0 fixed flex justify-center items-center z-10",
-    levelContainer: "z-10 text-4xl",
-  };
-
   if (!level) {
     return null;
   }
 
   return (
-    <AnimatePresence mode={"wait"}>
-      {showLevel && (
-        <motion.div animate={animate.opacity} className={styles.background}>
-          <motion.div
-            key={level}
-            className={styles.levelContainer}
-            animate={animate}
-            transition={transition}
-          >
-            Level {level}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <motion.div
+      animate={animate.opacity}
+      className="absolute w-full h-full flex justify-center items-center z-10"
+    >
+      <motion.div
+        key={level}
+        className="z-10 text-4xl"
+        animate={animate}
+        transition={transition}
+      >
+        Level {level}
+      </motion.div>
+    </motion.div>
   );
 }

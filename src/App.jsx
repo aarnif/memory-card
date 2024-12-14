@@ -6,8 +6,7 @@ import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
 import { Footer } from "./components/Footer";
-import { Level } from "./components/Level";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function App() {
   const gameState = useSelector((state) => state.game);
@@ -22,18 +21,20 @@ function App() {
   return (
     <>
       <Header />
-      <main className="flex-grow flex justify-center items-center">
-        <AnimatePresence mode="wait">
+      <AnimatePresence>
+        <motion.main
+          key="game-window"
+          className="flex-grow flex justify-center items-center"
+        >
           {!isGameStart ? (
             <NewGameModal key="new-game" />
           ) : (
             <Cards key="cards" />
           )}
-        </AnimatePresence>
-      </main>
-      {isGameOver && <RestartGameModal />}
+        </motion.main>
+        {isGameOver && <RestartGameModal />}
+      </AnimatePresence>
       <Footer />
-      <Level />
     </>
   );
 }
