@@ -6,7 +6,6 @@ import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
 import { Footer } from "./components/Footer";
-import { Overlay } from "./components/Overlay";
 import { Level } from "./components/Level";
 
 function App() {
@@ -34,7 +33,6 @@ function App() {
         <Cards />
       )}
       <Footer />
-      <Overlay />
       <Level />
     </>
   );
