@@ -21,19 +21,19 @@ function App() {
   return (
     <>
       <Header />
-      <AnimatePresence>
-        <motion.main
-          key="game-window"
-          className="flex-grow flex justify-center items-center"
-        >
+      <main
+        key="game-window"
+        className="flex-grow flex justify-center items-center"
+      >
+        <AnimatePresence>
           {!isGameStart ? (
             <NewGameModal key="new-game" />
           ) : (
             <Cards key="cards" />
           )}
-        </motion.main>
-        {isGameOver && <RestartGameModal />}
-      </AnimatePresence>
+          {isGameOver && <RestartGameModal />}
+        </AnimatePresence>
+      </main>
       <Footer />
     </>
   );
