@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { iniatilizeCards } from "./reducers/cards";
 import GameStart from "./components/GameStart";
 import RestartGameModal from "./components/RestartGameModal";
-import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
-import { Footer } from "./components/Footer";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
@@ -19,23 +17,15 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Header />
-      <main
-        key="game-window"
-        className="flex-grow flex justify-center items-center"
-      >
-        <AnimatePresence mode="wait">
-          {!isGameStart ? (
-            <GameStart key="game-start" />
-          ) : (
-            <Cards key="cards" />
-          )}
-          {isGameOver && <RestartGameModal />}
-        </AnimatePresence>
-      </main>
-      <Footer />
-    </>
+    <main
+      key="game-window"
+      className="flex-grow flex justify-center items-center"
+    >
+      <AnimatePresence mode="wait">
+        {!isGameStart ? <GameStart key="game-start" /> : <Cards key="cards" />}
+        {isGameOver && <RestartGameModal />}
+      </AnimatePresence>
+    </main>
   );
 }
 

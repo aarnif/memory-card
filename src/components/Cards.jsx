@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
+import { motion } from "framer-motion";
 import { showNewCards, shuffleDeck } from "../reducers/cards";
 import {
   toggleGameOver,
@@ -16,8 +17,10 @@ import {
 } from "../reducers/display";
 import cardFlip from "../assets/sounds/card_flip.wav";
 import levelNext from "../assets/sounds/arcade_ui_27.mp3";
+import { Header } from "./Header";
 import { Card } from "./Card";
 import { Level } from "./Level";
+import { Footer } from "./Footer";
 
 export function Cards() {
   const gameCards = useSelector((state) => state.cards);
@@ -95,8 +98,20 @@ export function Cards() {
   };
 
   return (
-    <main className="relative flex flex-col grow justify-center items-center p-10">
-      <div className="w-full h-full grid justify-items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl">
+    <motion.div
+      className="inset-0 fixed flex-grow flex flex-col justify-center bg-game-mode bg-cover bg-center bg-no-repeat bg-black bg-opacity-30 bg-blend-overlay"
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+    >
+      <Header />
+      <div className="relative flex-grow grid justify-items-center items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl">
         {shownCards.map((card) => (
           <Card
             key={card.id}
@@ -106,8 +121,9 @@ export function Cards() {
             playCard={() => playCard(card.id)}
           />
         ))}
+        {showLevel && <Level />}
       </div>
-      {showLevel && <Level />}
-    </main>
+      <Footer />
+    </motion.div>
   );
 }
