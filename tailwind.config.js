@@ -6,6 +6,7 @@ export default {
       backgroundImage: {
         gotham: "url('assets/other-images/gotham-city-background.png')",
         "new-game": "url('assets/other-images/new_game_background.png')",
+        "game-mode": "url('assets/other-images/game_mode_background.jpg')",
       },
       colors: {
         header: "rgba(0, 0, 0, 0.5)",
