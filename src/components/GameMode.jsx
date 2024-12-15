@@ -18,7 +18,7 @@ import {
 import cardFlip from "../assets/sounds/card_flip.wav";
 import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 import { Header } from "./Header";
-import { Card } from "./Card";
+import Card from "./Card";
 import { Level } from "./Level";
 import { Footer } from "./Footer";
 
