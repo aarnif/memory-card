@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { iniatilizeCards } from "./reducers/cards";
 import GameStart from "./components/GameStart";
 import RestartGameModal from "./components/RestartGameModal";
-import { Cards } from "./components/Cards";
+import { GameMode } from "./components/GameMode";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
@@ -22,7 +22,11 @@ function App() {
       className="flex-grow flex justify-center items-center"
     >
       <AnimatePresence mode="wait">
-        {!isGameStart ? <GameStart key="game-start" /> : <Cards key="cards" />}
+        {!isGameStart ? (
+          <GameStart key="game-start" />
+        ) : (
+          <GameMode key="game-mode" />
+        )}
         {isGameOver && <RestartGameModal />}
       </AnimatePresence>
     </main>

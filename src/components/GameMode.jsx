@@ -22,7 +22,7 @@ import { Card } from "./Card";
 import { Level } from "./Level";
 import { Footer } from "./Footer";
 
-export function Cards() {
+export function GameMode() {
   const gameCards = useSelector((state) => state.cards);
   const gameState = useSelector((state) => state.game);
   const displayState = useSelector((state) => state.display);
