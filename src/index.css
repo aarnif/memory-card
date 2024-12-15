@@ -7,6 +7,11 @@
   src: url("assets/fonts/badaboom_bb/BADABB__.TTF");
 }
 
+@font-face {
+  font-family: "batman-forever";
+  src: url("assets/fonts/batman_forever/batmfa__.TTF");
+}
+
 @layer base {
   body {
     @apply m-0 box-border bg-cover bg-no-repeat bg-gotham font-['badaboom'] text-dc-blue tracking-widest font-normal;
