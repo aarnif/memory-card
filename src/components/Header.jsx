@@ -1,10 +1,11 @@
-import batmanLogo from "../assets/other-images/batman-logo.png";
+import dcComicsLogo from "../assets/other-images/dc_comics_logo.svg";
 import batmanTheme from "../assets/sounds/batman_1989_theme.mp3";
 import ReactHowler from "react-howler";
 import Icon from "@mdi/react";
 import { mdiVolumeHigh, mdiVolumeOff, mdiMusic, mdiMusicOff } from "@mdi/js";
 import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
+import { motion } from "framer-motion";
 import {
   togglePlayMusicAction,
   togglePlaySoundAction,
@@ -35,51 +36,65 @@ export function Header() {
     dispatch(togglePlayMusicAction());
   };
 
-  const styles = {
-    header:
-      "bg-header flex justify-around items-center shadow-blue text-2xl lg:text-3xl xl:text-4xl p-2",
-    ul: "flex justify-around items-center",
-    li: "px-4",
-    h1: "text-4xl xl:text-5xl 2xl:text-6xl",
-    border:
-      "group border-4 border-dc-blue rounded-full m-2 cursor-pointer hover:border-sky-300 active:scale-95 transition",
-    iconContainer: "flex justify-around items-center p-1 xl:p-2 transition",
-    logoSize: "w-20 xl:w-24 2xl:w-28",
-    icon: "w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300 transition",
-  };
-
   return (
-    <header className={styles.header}>
-      <ul className={styles.ul}>
-        <li className={styles.li}>
-          <img className={styles.logoSize} src={batmanLogo} alt="Batman Logo" />
+    <motion.header
+      className="w-full flex justify-around items-center bg-header shadow-blue text-lg lg:text-xl xl:text-2xl font-extrabold p-2"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
+    >
+      <ul className="flex justify-around items-center">
+        <li className="px-4">
+          <img
+            className="w-12 xl:w-16 2xl:w-20"
+            src={dcComicsLogo}
+            alt="Batman Logo"
+          />
         </li>
-        <li className={styles.li}>
-          <h1 className={styles.h1}>Memory Game</h1>
+        <li className="px-4">
+          <h1 className="text-2xl xl:text-3xl 2xl:text-4xl">Memory Game</h1>
         </li>
       </ul>
-      <ul className={styles.ul}>
-        <li className={styles.li}>Level: {level}</li>
-        <li className={styles.li}>High Score: {highScore}</li>
-        <li className={styles.border} onClick={togglePlaySound}>
+      <ul className="flex justify-around items-center">
+        <li className="px-4">Level: {level}</li>
+        <li className="px-4">High Score: {highScore}</li>
+        <li
+          className="group border-4 border-dc-blue rounded-full m-2 cursor-pointer hover:border-sky-300 active:scale-95 transition"
+          onClick={togglePlaySound}
+        >
           {playSound ? (
-            <div className={styles.iconContainer}>
-              <Icon path={mdiVolumeHigh} className={styles.icon} />
+            <div className="flex justify-around items-center p-1 xl:p-2 transition">
+              <Icon
+                path={mdiVolumeHigh}
+                className="w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300 transition"
+              />
             </div>
           ) : (
-            <div className={styles.iconContainer}>
-              <Icon path={mdiVolumeOff} className={styles.icon} />
+            <div className="flex justify-around items-center p-1 xl:p-2 transition">
+              <Icon
+                path={mdiVolumeOff}
+                className="w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300 transition"
+              />
             </div>
           )}
         </li>
-        <li className={styles.border} onClick={togglePlayMusic}>
+        <li
+          className="group border-4 border-dc-blue rounded-full m-2 cursor-pointer hover:border-sky-300 active:scale-95 transition"
+          onClick={togglePlayMusic}
+        >
           {playMusic ? (
-            <div className={styles.iconContainer}>
-              <Icon path={mdiMusic} className={styles.icon} />
+            <div className="flex justify-around items-center p-1 xl:p-2 transition">
+              <Icon
+                path={mdiMusic}
+                className="w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300 transition"
+              />
             </div>
           ) : (
-            <div className={styles.iconContainer}>
-              <Icon path={mdiMusicOff} className={styles.icon} />
+            <div className="flex justify-around items-center p-1 xl:p-2 transition">
+              <Icon
+                path={mdiMusicOff}
+                className="w-8 xl:w-10 2xl:w-12 group-hover:text-sky-300 transition"
+              />
             </div>
           )}
         </li>
@@ -89,6 +104,6 @@ export function Header() {
           )}
         </li>
       </ul>
-    </header>
+    </motion.header>
   );
 }
