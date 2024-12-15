@@ -5,6 +5,7 @@ import {
   toggleShowLevelAction,
   setNewGameCardAnimationAction,
 } from "../reducers/display";
+import dcComicsLogo from "../assets/other-images/dc_comics_logo.svg";
 import useSound from "use-sound";
 import clickButton from "../assets/sounds/new_game_click.mp3";
 import levelNext from "../assets/sounds/arcade_ui_27.mp3";
@@ -65,9 +66,11 @@ const NewGameModal = () => {
         className="inset-0 fixed flex justify-center items-center bg-new-game bg-center bg-cover bg-no-repeat bg-black bg-opacity-80 bg-blend-overlay"
         initial={{
           opacity: 0,
+          scale: 2,
         }}
         animate={{
           opacity: 1,
+          scale: 1,
           transition: {
             duration: animationTransition.duration,
           },
@@ -76,29 +79,41 @@ const NewGameModal = () => {
           opacity: 0,
           scale: 2,
           transition: {
-            delay: 0.3,
-            duration: 0.3,
+            delay: animationTransition.delay / 2,
+            duration: 0.5,
           },
         }}
       >
         <motion.div
-          className="relative z-10 bg-zinc-800 bg-opacity-70 rounded-xl shadow-blue flex flex-col justify-center items-center pt-10 px-10"
+          className="relative z-10 flex flex-col justify-center items-center pt-10 px-10 font-['batman-forever']"
+          initial={{
+            opacity: 0,
+            scale: 0,
+            y: 100,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: {
+              delay: animationTransition.delay / 2,
+              duration: 0.5,
+            },
+          }}
           exit={{
             opacity: 0,
-            y: "-100%",
+            scale: 0,
+            y: 100,
             transition: {
-              duration: 0.3,
+              duration: 0.5,
             },
           }}
         >
-          <h1 className="text-4xl pb-4">Welcome to Gotham City!</h1>
-          <p className="text-2xl text-center py-1">
-            Click each character once to level up.
-          </p>
-          <p className="text-2xl text-center py-1">
-            Ready to test your memory?
-          </p>
-          <p className="text-3xl text-center py-1">Click Begin!</p>
+          <div className="flex flex-col justify-center items-center mb-8">
+            <img src={dcComicsLogo} alt="" className="w-24" />
+            <h1 className="text-8xl pb-4">BATMAN</h1>
+          </div>
+          <h2 className="text-4xl text-center py-1">Memory Game</h2>
           <motion.button
             className="shadow-blue hover:shadow-skyBlue hover:bg-zinc-900 rounded-xl text-3xl text-center py-3 px-9 m-4 hover:text-sky-300"
             onClick={clickNewGame}
