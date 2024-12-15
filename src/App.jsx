@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { iniatilizeCards } from "./reducers/cards";
-import NewGameModal from "./components/NewGameModal";
+import GameStart from "./components/GameStart";
 import RestartGameModal from "./components/RestartGameModal";
 import { Header } from "./components/Header";
 import { Cards } from "./components/Cards";
@@ -27,7 +27,7 @@ function App() {
       >
         <AnimatePresence mode="wait">
           {!isGameStart ? (
-            <NewGameModal key="new-game" />
+            <GameStart key="game-start" />
           ) : (
             <Cards key="cards" />
           )}

@@ -11,7 +11,7 @@ import clickButton from "../assets/sounds/new_game_click.mp3";
 import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 import { motion } from "framer-motion";
 
-const NewGameModal = () => {
+const GameStart = () => {
   const gameCards = useSelector((state) => state.cards);
   const gameState = useSelector((state) => state.game);
   const displayState = useSelector((state) => state.display);
@@ -127,4 +127,4 @@ const NewGameModal = () => {
   );
 };
 
-export default NewGameModal;
+export default GameStart;
