@@ -12,7 +12,12 @@ export function Footer() {
   };
 
   return (
-    <footer className={styles.footer}>
+    <motion.footer
+      className={styles.footer}
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
+    >
       <ul className={styles.ul}>
         <li className={styles.li}>
           <h3 className={styles.h3}>Created By aarnif</h3>
@@ -39,6 +44,6 @@ export function Footer() {
           </motion.div>
         </li>
       </ul>
-    </footer>
+    </motion.footer>
   );
 }
