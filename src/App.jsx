@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { iniatilizeCards } from "./reducers/cards";
 import GameStart from "./components/GameStart";
-import RestartGameModal from "./components/RestartGameModal";
+import GameOver from "./components/GameOver";
 import { GameMode } from "./components/GameMode";
 import { AnimatePresence } from "framer-motion";
 
@@ -24,7 +24,7 @@ function App() {
       <AnimatePresence mode="wait">
         {!isGameStart ? <GameStart key="game-start" /> : <GameMode />}
       </AnimatePresence>
-      <AnimatePresence>{isGameOver && <RestartGameModal />}</AnimatePresence>
+      <AnimatePresence>{isGameOver && <GameOver />}</AnimatePresence>
     </main>
   );
 }
