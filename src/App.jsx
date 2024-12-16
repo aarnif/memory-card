@@ -23,8 +23,8 @@ function App() {
     >
       <AnimatePresence mode="wait">
         {!isGameStart ? <GameStart key="game-start" /> : <GameMode />}
-        {isGameOver && <RestartGameModal />}
       </AnimatePresence>
+      <AnimatePresence>{isGameOver && <RestartGameModal />}</AnimatePresence>
     </main>
   );
 }

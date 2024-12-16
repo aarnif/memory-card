@@ -48,24 +48,34 @@ const GameModal = () => {
     <motion.div
       key="overlay"
       className="inset-0 fixed flex justify-center items-center bg-black bg-opacity-70"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
       exit={{ opacity: 0 }}
     >
-      <div className="relative top-[-100px] z-10 bg-zinc-800 rounded-xl shadow-blue flex flex-col justify-center items-center pt-10 px-20">
+      <motion.div
+        key="game-over-modal"
+        className="relative z-10 bg-zinc-950 bg-opacity-70 rounded-xl shadow-blue flex flex-col justify-center items-center pt-10 px-20"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0 }}
+      >
         <h1 className="text-4xl pb-4">Game Over!</h1>
 
         {gameEndResult === topLevel ? (
           <>
             <p className="text-3xl text-center py-1">Congratulations!</p>
             <p className="text-3xl text-center py-1">
-              You reached the end of the game!{" "}
+              You reached the end of the game!
             </p>
           </>
         ) : (
           <>
-            <p className="text-3xl text-center py-1">{`You reached level ${gameEndResult}!`}</p>
-            <p className="text-3xl text-center py-1">Ready to try again?</p>
+            <p className="text-3xl text-center py-1">{`You reached`}</p>
+            <p className="text-3xl text-center py-1">{`level ${gameEndResult}!`}</p>
           </>
         )}
         <motion.button
@@ -73,9 +83,9 @@ const GameModal = () => {
           onClick={clickRestartGame}
           whileTap={{ scale: 0.9 }}
         >
-          New Game
+          Play Again
         </motion.button>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
