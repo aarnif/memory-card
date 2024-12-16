@@ -10,7 +10,7 @@ This is Memory Card game built with Vite + React. The project is part of the [Th
 
 ## Live Preview
 
-[Memory Card](https://aarnif.github.io/odin-memory-card/)
+- [Memory Card](https://memory-card-aarnif.netlify.app/)
 
 ## Technologies
 
@@ -18,7 +18,10 @@ This is Memory Card game built with Vite + React. The project is part of the [Th
 - Tailwind CSS
 - HTML
 - Midjourney (for generating images)
-- Icons from [Font Awesome](https://fontawesome.com/)
+
+## Icons
+
+- [Material Design Icons](https://pictogrammers.com/library/mdi/)
 
 ## Music
 
@@ -32,17 +35,20 @@ they are based on characters/logos which I do not hold any rights.
 
 ## Images
 
-![Memory Card](/src/assets/other-images/page.png)
-The game page
+![Start page](/src/assets/other-images/game_start.png)
+Start page
+
+![Game mode](/src/assets/other-images/game_mode.png)
+Game mode
 
 ## Instructions
 
 ```
-HTTPS - git clone https://github.com/aarnif/odin-memory-card.git
+HTTPS - git clone https://github.com/aarnif/memory-card.git
 
-SSH - git clone git@github.com:aarnif/odin-memory-card.git
+SSH - git clone git@github.com:aarnif/memory-card.git
 
-cd odin-memory-card
+cd memory-card
 
 npm install
 
