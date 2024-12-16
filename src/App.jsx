@@ -22,11 +22,7 @@ function App() {
       className="flex-grow flex justify-center items-center"
     >
       <AnimatePresence mode="wait">
-        {!isGameStart ? (
-          <GameStart key="game-start" />
-        ) : (
-          <GameMode key="game-mode" />
-        )}
+        {!isGameStart ? <GameStart key="game-start" /> : <GameMode />}
         {isGameOver && <RestartGameModal />}
       </AnimatePresence>
     </main>
