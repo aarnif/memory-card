@@ -39,11 +39,13 @@ function Card({ image, name, playCard }) {
           animate={animate}
           exit={exit}
         >
-          <div className={styles.imageContainer}>
-            <img className="w-full rounded-xl" src={image} alt="" />
-          </div>
-          <div className="flex justify-center items-center py-1 text-xs 2xl:text-md 3xl:text-lg">
-            {name}
+          <div className="flex flex-col justify-center items-center">
+            <div className={styles.imageContainer}>
+              <img className="w-full" src={image} alt="" />
+            </div>
+            <div className="py-1 text-xs 2xl:text-md 3xl:text-lg text-wrap text-center">
+              {name}
+            </div>
           </div>
         </motion.div>
       ) : (
