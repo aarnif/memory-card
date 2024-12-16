@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "badaboom";
-  src: url("assets/fonts/badaboom_bb/BADABB__.TTF");
-}
-
-@font-face {
   font-family: "batman-forever";
   src: url("assets/fonts/batman_forever/batmfa__.TTF");
 }
