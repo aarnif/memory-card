@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "batman-forever";
-  src: url("assets/fonts/batman_forever/batmfa__.TTF");
+  src: url("fonts/batman_forever/batmfa__.TTF");
 }
 
 @layer base {
