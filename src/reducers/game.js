@@ -8,7 +8,7 @@ const initialState = {
   isGameOver: false,
   level: null,
   gameEndResult: null,
-  highScore: null,
+  highScore: 1,
   cardsAddedPerLevel: cardsAddedPerLevel,
   topLevel: characters.length / cardsAddedPerLevel,
 };
