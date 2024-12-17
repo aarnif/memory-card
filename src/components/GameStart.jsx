@@ -1,10 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { toggleGameStart, resetLevel } from "../reducers/game";
-import { resetDeck } from "../reducers/cards";
-import {
-  toggleShowLevelAction,
-  setNewGameCardAnimationAction,
-} from "../reducers/display";
+import { toggleGameStart } from "../reducers/game";
+import { toggleShowLevelAction } from "../reducers/display";
 import dcComicsLogo from "../assets/other-images/dc_comics_logo.svg";
 import useSound from "use-sound";
 import clickButton from "../assets/sounds/new_game_click.mp3";
@@ -12,12 +8,9 @@ import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 import { motion } from "framer-motion";
 
 const GameStart = () => {
-  const gameCards = useSelector((state) => state.cards);
-  const gameState = useSelector((state) => state.game);
   const displayState = useSelector((state) => state.display);
   const dispatch = useDispatch();
 
-  const { level, cardsAddedPerLevel } = gameState;
   const { playSound } = displayState;
 
   const [playClickSound] = useSound(clickButton, {
@@ -35,21 +28,13 @@ const GameStart = () => {
 
   const clickNewGame = () => {
     playClickSound();
-
-    setTimeout(() => {
-      dispatch(toggleGameStart());
-      dispatch(setNewGameCardAnimationAction());
-      dispatch(resetDeck(gameCards, cardsAddedPerLevel));
-      dispatch(resetLevel());
-    }, 100);
+    dispatch(toggleGameStart());
+    console.log("New game started!");
 
     // Start the level animation after the new game animation
     setTimeout(() => {
       dispatch(toggleShowLevelAction(nextLevelSound));
     }, (animationTransition.delay + animationTransition.duration) * 1000);
-
-    console.log("New game started!");
-    console.log(`First level ${level}!`);
   };
 
   return (

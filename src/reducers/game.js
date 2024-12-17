@@ -6,7 +6,7 @@ const cardsAddedPerLevel = 2;
 const initialState = {
   isGameStart: false,
   isGameOver: false,
-  level: null,
+  level: 1,
   gameEndResult: null,
   highScore: 1,
   cardsAddedPerLevel: cardsAddedPerLevel,
@@ -25,9 +25,6 @@ const gameSlice = createSlice({
     },
     increaseLevel(state, action) {
       state.level = state.level + 1;
-    },
-    setLeveltoNull(state, action) {
-      state.level = null;
     },
     resetLevel(state, action) {
       state.level = 1;
@@ -70,13 +67,6 @@ export const increaseGameLevel = () => {
   console.log("Dispatching setGameLevel action");
   return (dispatch) => {
     dispatch(increaseLevel());
-  };
-};
-
-export const setGameLeveltoNull = () => {
-  console.log("Dispatching setGameLeveltoNull action");
-  return (dispatch) => {
-    dispatch(setLeveltoNull());
   };
 };
 

@@ -23,10 +23,6 @@ export function Level() {
     duration: levelAnimationDuration / 1000,
   };
 
-  if (!level) {
-    return null;
-  }
-
   return (
     <motion.div
       animate={animate.opacity}

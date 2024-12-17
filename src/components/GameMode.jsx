@@ -2,18 +2,20 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
 import { motion } from "framer-motion";
-import { showNewCards, shuffleDeck } from "../reducers/cards";
+import { showNewCards, shuffleDeck, resetDeck } from "../reducers/cards";
 import {
   toggleGameOver,
   increaseGameLevel,
-  setGameLeveltoNull,
+  // setGameLeveltoNull,
   setGameResult,
   updateHighScore,
+  resetLevel,
 } from "../reducers/game";
 import {
   toggleShowOverlayAction,
   toggleShowLevelAction,
   setClickCardAnimationAction,
+  setNewGameCardAnimationAction,
 } from "../reducers/display";
 import cardFlip from "../assets/sounds/card_flip.wav";
 import levelNext from "../assets/sounds/arcade_ui_27.mp3";
@@ -43,6 +45,10 @@ export function GameMode() {
   const shownCards = gameCards.filter((card) => card.isShown);
 
   useEffect(() => {
+    gameStart();
+  }, []);
+
+  useEffect(() => {
     const checkIfTopLevelAchieved = (topLevel, level) => topLevel === level;
     if (checkIfTopLevelAchieved(topLevel, level)) {
       gameOver();
@@ -64,6 +70,13 @@ export function GameMode() {
     }
   }, [clickedCards, gameCards]);
 
+  const gameStart = () => {
+    console.log("Game mode started!");
+    dispatch(setNewGameCardAnimationAction());
+    dispatch(resetDeck(gameCards, cardsAddedPerLevel));
+    dispatch(resetLevel());
+  };
+
   const nextLevel = () => {
     dispatch(increaseGameLevel());
     dispatch(toggleShowLevelAction(nextLevelSound));
@@ -76,7 +89,7 @@ export function GameMode() {
     dispatch(toggleGameOver());
     dispatch(updateHighScore());
     dispatch(setGameResult());
-    dispatch(setGameLeveltoNull());
+    dispatch(resetLevel());
     console.log("Game over!");
   };
 
