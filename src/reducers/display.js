@@ -21,7 +21,7 @@ const displaySlice = createSlice({
       state.showOverlay = !state.showOverlay;
     },
     toggleShowLevel(state, action) {
-      state.showLevel = !state.showLevel;
+      state.showLevel = action.payload;
     },
     togglePlayMusic(state, action) {
       state.playMusic = !state.playMusic;
