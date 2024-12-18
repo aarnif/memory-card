@@ -55,11 +55,10 @@ export const toggleShowOverlayAction = () => {
   };
 };
 
-export const toggleShowLevelAction = (nextLevelSound) => {
+export const toggleShowLevelAction = () => {
   console.log("Dispatching toggleShowLevel action");
   return (dispatch) => {
     dispatch(toggleShowLevel(true));
-    nextLevelSound();
     setTimeout(() => {
       dispatch(toggleShowLevel(false));
     }, initialState.levelAnimationDuration);

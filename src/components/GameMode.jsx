@@ -6,7 +6,6 @@ import { showNewCards, shuffleDeck, resetDeck } from "../reducers/cards";
 import {
   toggleGameOver,
   increaseGameLevel,
-  // setGameLeveltoNull,
   setGameResult,
   updateHighScore,
   resetLevel,
@@ -18,7 +17,6 @@ import {
   setNewGameCardAnimationAction,
 } from "../reducers/display";
 import cardFlip from "../assets/sounds/card_flip.wav";
-import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 import { Header } from "./Header";
 import Card from "./Card";
 import { Level } from "./Level";
@@ -34,10 +32,6 @@ export function GameMode() {
   const { playSound, cardAnimationDuration, showLevel } = displayState;
 
   const [playFlipSound] = useSound(cardFlip, {
-    volume: playSound ? 0.25 : 0,
-  });
-
-  const [nextLevelSound] = useSound(levelNext, {
     volume: playSound ? 0.25 : 0,
   });
 
@@ -75,11 +69,12 @@ export function GameMode() {
     dispatch(setNewGameCardAnimationAction());
     dispatch(resetDeck(gameCards, cardsAddedPerLevel));
     dispatch(resetLevel());
+    dispatch(toggleShowLevelAction());
   };
 
   const nextLevel = () => {
     dispatch(increaseGameLevel());
-    dispatch(toggleShowLevelAction(nextLevelSound));
+    dispatch(toggleShowLevelAction());
     dispatch(showNewCards(gameCards, cardsAddedPerLevel));
     console.log(`Next level ${level}!`);
   };

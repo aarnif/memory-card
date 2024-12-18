@@ -1,9 +1,24 @@
+import { useEffect } from "react";
+
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import useSound from "use-sound";
+
+import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 
 export function Level() {
   const gameState = useSelector((state) => state.game);
   const displayState = useSelector((state) => state.display);
+
+  const { playSound } = displayState;
+
+  const [nextLevelSound] = useSound(levelNext, {
+    volume: playSound ? 0.25 : 0,
+  });
+
+  useEffect(() => {
+    nextLevelSound();
+  }, [nextLevelSound]);
 
   const { level } = gameState;
   const { levelAnimationDuration } = displayState;

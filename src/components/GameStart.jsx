@@ -1,10 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { toggleGameStart } from "../reducers/game";
-import { toggleShowLevelAction } from "../reducers/display";
 import dcComicsLogo from "../assets/other-images/dc_comics_logo.svg";
 import useSound from "use-sound";
 import clickButton from "../assets/sounds/new_game_click.mp3";
-import levelNext from "../assets/sounds/arcade_ui_27.mp3";
 import { motion } from "framer-motion";
 
 const GameStart = () => {
@@ -17,10 +15,6 @@ const GameStart = () => {
     volume: playSound ? 0.25 : 0,
   });
 
-  const [nextLevelSound] = useSound(levelNext, {
-    volume: playSound ? 0.25 : 0,
-  });
-
   const animationTransition = {
     delay: 2,
     duration: 1,
@@ -30,11 +24,6 @@ const GameStart = () => {
     playClickSound();
     dispatch(toggleGameStart());
     console.log("New game started!");
-
-    // Start the level animation after the new game animation
-    setTimeout(() => {
-      dispatch(toggleShowLevelAction(nextLevelSound));
-    }, (animationTransition.delay + animationTransition.duration) * 1000);
   };
 
   return (
