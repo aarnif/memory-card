@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 2px black;
+  }
+}
+
 @font-face {
   font-family: "batman-forever";
   src: url("assets/fonts/batman_forever/batmfa__.ttf");
@@ -9,7 +15,7 @@
 
 @layer base {
   body {
-    @apply m-0 box-border bg-black font-['batman-forever'] text-dc-blue tracking-widest font-normal;
+    @apply m-0 box-border bg-black font-['batman-forever'] text-dc-blue tracking-widest font-normal text-shadow;
   }
   #root {
     @apply flex flex-col min-h-screen;

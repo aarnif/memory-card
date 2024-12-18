@@ -79,7 +79,7 @@ const GameOver = () => {
           </>
         )}
         <motion.button
-          className="shadow-blue hover:shadow-skyBlue hover:bg-zinc-900 rounded-xl text-3xl text-center py-3 px-9 m-4 hover:text-sky-300"
+          className="shadow-blue hover:shadow-skyBlue hover:bg-zinc-900 rounded-xl text-3xl text-center text-shadow py-3 px-9 m-4 hover:text-sky-300"
           onClick={clickRestartGame}
           whileTap={{ scale: 0.9 }}
         >
