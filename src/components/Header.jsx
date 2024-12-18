@@ -12,7 +12,7 @@ import {
 } from "../reducers/display";
 import muteButton from "../assets/sounds/mute_button.mp3";
 
-export function Header() {
+export function Header({ animationTransition }) {
   const gameState = useSelector((state) => state.game);
   const displayState = useSelector((state) => state.display);
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ export function Header() {
       className="w-full flex justify-around items-center bg-header shadow-blue text-lg lg:text-xl xl:text-2xl font-extrabold p-2"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ delay: 0.5, duration: 0.5 }}
+      transition={{ ...animationTransition, duration: 0.5 }}
     >
       <ul className="flex justify-around items-center">
         <li className="px-4">

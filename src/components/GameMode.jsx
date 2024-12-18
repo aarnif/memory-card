@@ -38,6 +38,11 @@ export function GameMode() {
   const clickedCards = gameCards.filter((card) => card.isClicked);
   const shownCards = gameCards.filter((card) => card.isShown);
 
+  const animationTransition = {
+    delay: 1,
+    duration: 0.5,
+  };
+
   useEffect(() => {
     gameStart();
   }, []);
@@ -66,10 +71,12 @@ export function GameMode() {
 
   const gameStart = () => {
     console.log("Game mode started!");
-    dispatch(setNewGameCardAnimationAction());
-    dispatch(resetDeck(gameCards, cardsAddedPerLevel));
-    dispatch(resetLevel());
-    dispatch(toggleShowLevelAction());
+    setTimeout(() => {
+      dispatch(setNewGameCardAnimationAction());
+      dispatch(resetDeck(gameCards, cardsAddedPerLevel));
+      dispatch(resetLevel());
+      dispatch(toggleShowLevelAction());
+    }, (animationTransition.delay + animationTransition.duration) * 1000);
   };
 
   const nextLevel = () => {
@@ -107,31 +114,47 @@ export function GameMode() {
 
   return (
     <motion.div
-      className="inset-0 fixed flex-grow flex flex-col justify-center bg-game-mode bg-cover bg-center bg-no-repeat bg-black bg-opacity-30 bg-blend-overlay"
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 0.5,
-      }}
+      key="overlay"
+      className="inset-0 fixed flex justify-center items-center bg-black"
     >
-      <Header />
-      <div className="relative flex-grow grid justify-items-center items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl">
-        {shownCards.map((card) => (
-          <Card
-            key={card.id}
-            id={card.id}
-            image={card.image}
-            name={card.name}
-            playCard={() => playCard(card.id)}
-          />
-        ))}
-        {showLevel && <Level />}
-      </div>
-      <Footer />
+      <motion.div
+        className="inset-0 fixed flex-grow flex flex-col justify-center bg-game-mode bg-cover bg-center bg-no-repeat bg-black bg-opacity-30 bg-blend-overlay"
+        initial={{
+          opacity: 0,
+          scale: 2,
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+        }}
+        transition={{
+          duration: animationTransition.duration,
+        }}
+      >
+        <Header animationTransition={animationTransition} />
+        <motion.div
+          className="relative flex-grow grid justify-items-center items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl"
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={animationTransition}
+        >
+          {shownCards.map((card) => (
+            <Card
+              key={card.id}
+              id={card.id}
+              image={card.image}
+              name={card.name}
+              playCard={() => playCard(card.id)}
+            />
+          ))}
+          {showLevel && <Level />}
+        </motion.div>
+        <Footer animationTransition={animationTransition} />
+      </motion.div>
     </motion.div>
   );
 }

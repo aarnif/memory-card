@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
 
-export function Footer() {
+export function Footer({ animationTransition }) {
   const styles = {
     footer:
       "bg-header flex flex-col justify-around items-center shadow-blue p-2",
@@ -16,7 +16,7 @@ export function Footer() {
       className={styles.footer}
       initial={{ y: 100 }}
       animate={{ y: 0 }}
-      transition={{ delay: 0.5, duration: 0.5 }}
+      transition={{ ...animationTransition, duration: 0.3 }}
     >
       <ul className={styles.ul}>
         <li className={styles.li}>
