@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import dcComicsLogo from "../assets/other-images/dc_comics_logo.svg";
-import batmanLogo from "../assets/other-images/batman-logo.png";
 import { useSelector } from "react-redux";
 
 function Card({ image, name, playCard }) {
@@ -50,7 +49,7 @@ function Card({ image, name, playCard }) {
         </motion.div>
       ) : (
         <motion.div
-          key={batmanLogo}
+          key={dcComicsLogo}
           className={styles.card}
           initial={initial}
           animate={animate}
