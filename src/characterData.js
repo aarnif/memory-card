@@ -18,7 +18,7 @@ import taliaAlGhul from "./assets/card-images/thalia-al-ghul.png";
 
 export const characters = [
   {
-    name: "Alfred Pennyworth",
+    name: "Alfred",
     id: uuidv4(),
     image: alfredPennyworth,
     isClicked: false,
