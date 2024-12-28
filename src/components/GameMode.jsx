@@ -133,7 +133,7 @@ export function GameMode() {
       >
         <Header animationTransition={animationTransition} />
         <motion.div
-          className="relative flex-grow grid justify-items-center items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl"
+          className="relative p-8 flex-grow grid justify-items-center items-center gap-5 grid-cols-cards-sm xl:grid-cols-cards-lg 3xl:grid-cols-cards-xl"
           initial={{
             opacity: 0,
           }}
