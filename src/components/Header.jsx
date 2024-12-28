@@ -38,7 +38,7 @@ export function Header({ animationTransition }) {
 
   return (
     <motion.header
-      className="w-full flex justify-around items-center bg-header shadow-blue text-lg lg:text-xl xl:text-2xl font-extrabold p-2"
+      className="w-full flex justify-around items-center bg-header shadow-blue text-md lg:text-lg xl:text-xl 2xl:text-2xl font-extrabold p-2"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ ...animationTransition, duration: 0.5 }}
