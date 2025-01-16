@@ -48,7 +48,7 @@ export function GameMode() {
   }, []);
 
   useEffect(() => {
-    const checkIfTopLevelAchieved = (topLevel, level) => topLevel === level;
+    const checkIfTopLevelAchieved = (topLevel, level) => level > topLevel;
     if (checkIfTopLevelAchieved(topLevel, level)) {
       gameOver();
     }
