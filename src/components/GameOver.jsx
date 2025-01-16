@@ -65,7 +65,7 @@ const GameOver = () => {
       >
         <h1 className="text-4xl pb-4">Game Over!</h1>
 
-        {gameEndResult === topLevel ? (
+        {gameEndResult > topLevel ? (
           <>
             <p className="text-3xl text-center py-1">Congratulations!</p>
             <p className="text-3xl text-center py-1">
